@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELIRIO — Destilería Artesanal de Vanguardia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --negro-profundo: #0c0c0c;
+            --negro-suave: #161616;
+            --dorado: #C5A059;
+            --dorado-brillo: #E2C284;
+            --blanco: #ffffff;
+            --gris-luxe: rgba(255, 255, 255, 0.05);
+            --ff-display: 'Cormorant Garamond', serif;
+            --ff-body: 'Josefin Sans', sans-serif;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--negro-profundo);
+            color: var(--blanco);
+            font-family: var(--ff-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── BACKGROUND & CURSOR ─── */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.03) 0%, transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+
+        #cursor {
+            position: fixed; width: 8px; height: 8px; background: var(--dorado);
+            border-radius: 50%; pointer-events: none; z-index: 9999;
+            transition: transform 0.1s; mix-blend-mode: difference;
+        }
+
+        /* ─── NAVEGACIÓN ─── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            padding: 1rem 5%; background: rgba(12, 12, 12, 0.9);
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--gris-luxe);
+        }
+
+        .logo {
+            font-family: var(--ff-display); font-size: 2rem; letter-spacing: 0.2em;
+            text-decoration: none; color: var(--blanco);
+        }
+        .logo span { display: block; font-size: 0.5rem; color: var(--dorado); letter-spacing: 0.4em; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: var(--blanco); font-size: 0.7rem; 
+            letter-spacing: 0.2em; text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--dorado); }
+
+        /* ─── SECCIONES GENÉRICAS ─── */
+        section { padding: 8rem 5%; position: relative; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ─── HERO ─── */
+        #hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; border-bottom: 1px solid var(--gris-luxe);
+        }
+        .hero-title {
+            font-family: var(--ff-display); font-size: clamp(3.5rem, 10vw, 9rem);
+            font-weight: 300; line-height: 0.85; margin-bottom: 2rem;
+        }
+
+        /* ─── HISTORIA ─── */
+        #historia { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .historia-text h2 { font-family: var(--ff-display); font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--dorado); }
+        .historia-img { 
+            height: 600px; background: var(--negro-suave); 
+            border: 1px solid var(--gris-luxe); position: relative;
+        }
+        /* Imagen representativa del espíritu artesanal */
+
+        /* ─── PRODUCTOS (GLASS CARDS) ─── */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--gris-luxe);
+            padding: 3rem; transition: var(--transition); text-align: center;
+        }
+        .glass-card:hover { border-color: var(--dorado); transform: translateY(-10px); }
+        .glass-card h3 { font-family: var(--ff-display); font-size: 2.2rem; margin: 1.5rem 0; }
+        .price { color: var(--dorado); font-size: 1.4rem; font-family: var(--ff-display); margin-bottom: 1.5rem; display: block; }
+
+        /* ─── PROCESO ─── */
+        .step { border-left: 1px solid var(--dorado); padding-left: 2rem; margin-bottom: 3rem; }
+        .step span { font-family: var(--ff-display); color: var(--dorado); font-size: 1.2rem; }
+
+        /* ─── BOTONES ─── */
+        .btn {
+            padding: 1.2rem 2.5rem; border: 1px solid var(--dorado);
+            background: transparent; color: var(--dorado);
+            font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+            cursor: pointer; transition: 0.4s;
+        }
+        .btn:hover { background: var(--dorado); color: var(--negro-profundo); }
+
+        /* ─── CARRITO (DRAWER) ─── */
+        .cart-drawer {
+            position: fixed; top: 0; right: -100%; width: 400px; height: 100%;
+            background: var(--negro-suave); border-left: 1px solid var(--gris-luxe);
+            z-index: 2000; padding: 4rem 2rem; transition: var(--transition);
+        }
+        .cart-drawer.open { right: 0; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 4rem 5%; border-top: 1px solid var(--gris-luxe);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        @media (max-width: 768px) {
+            #historia { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .cart-drawer { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div id="cursor"></div>
+
+<nav id="navbar">
+    <a href="#" class="logo">DELIRIO<span>San Juan · Argentina</span></a>
+    <div class="nav-links">
+        <a href="#historia">Herencia</a>
+        <a href="#productos">Colección</a>
+        <a href="#proceso">Destilación</a>
+        <a href="#contacto">Contacto</a>
+        <button class="btn" style="padding: 0.6rem 1.2rem;" onclick="toggleCart()">Carrito (<span id="cart-count">0</span>)</button>
+    </div>
+</nav>
+
+<section id="hero">
+    <div class="reveal">
+        <p style="letter-spacing: 0.5em; color: var(--dorado); margin-bottom: 2rem;">DESTILERÍA ARTESANAL DE VANGUARDIA</p>
+        <h1 class="hero-title">BOTÁNICOS<br><em>DEL DESIERTO</em></h1>
+        <a href="#productos" class="btn">Comprar Ahora</a>
+    </div>
+</section>
+
+<section id="historia">
+    <div class="historia-img reveal">
+        <div style="position: absolute; bottom: 2rem; right: 2rem; text-align: right;">
+            <p style="font-size: 0.7rem; color: var(--dorado);">EST. 2024</p>
+        </div>
+    </div>
+    <div class="historia-text reveal">
+        <h2>Nuestra Herencia</h2>
+        <p>Nacido entre las montañas de San Juan, Delirio es el resultado de una búsqueda incansable por la pureza. Utilizamos métodos de destilación tradicionales combinados con botánicos autóctonos para crear una experiencia que desafía los sentidos.</p>
+        <br>
+        <p>Cada botella es numerada y firmada, garantizando la excelencia en pequeñas partidas (Small Batch).</p>
+    </div>
+</section>
+
+<section id="productos">
+    <div style="text-align: center; margin-bottom: 5rem;" class="reveal">
+        <h2 style="font-family: var(--ff-display); font-size: 3.5rem;">La Colección</h2>
+    </div>
+    <div class="grid">
+        <div class="glass-card reveal">
+            <p style="font-size: 0.6rem; color: var(--dorado); letter-spacing: 0.2em;">BOTANICAL GIN</p>
+            <h3>London Dry</h3>
+            <p>Enebro intenso con notas cítricas de pomelo rosado.</p>
+            <span class="price">$19.500</span>
+            <button class="btn" onclick="addToCart()">Añadir al Carrito</button>
+        </div>
+        <div class="glass-card reveal">
+            <p style="font-size: 0.6rem; color: var(--dorado); letter-spacing: 0.2em;">AGED SERIES</p>
+            <h3>Roble Francés</h3>
+            <p>Destilado reposado en barricas de vino Malbec.</p>
+            <span class="price">$24.000</span>
+            <button class="btn" onclick="addToCart()">Añadir al Carrito</button>
+        </div>
+        <div class="glass-card reveal">
+            <p style="font-size: 0.6rem; color: var(--dorado); letter-spacing: 0.2em;">LIMITED EDITION</p>
+            <h3>Montaña Floral</h3>
+            <p>Infusionado con flores de jarilla y hierbas andinas.</p>
+            <span class="price">$22.000</span>
+            <button class="btn" onclick="addToCart()">Añadir al Carrito</button>
+        </div>
+    </div>
+</section>
+
+<section id="proceso" style="background: var(--negro-suave);">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--ff-display); font-size: 3.5rem; margin-bottom: 4rem; text-align: center;" class="reveal">El Proceso</h2>
+        <div class="step reveal">
+            <span>01. Selección</span>
+            <p>Elegimos manualmente cada botánico en su punto justo de madurez.</p>
+        </div>
+        <div class="step reveal">
+            <span>02. Maceración</span>
+            <p>48 horas de contacto para extraer la esencia más pura del espíritu.</p>
+        </div>
+        <div class="step reveal">
+            <span>03. Destilación</span>
+            <p>Lenta y controlada en alambique de cobre, descartando cabezas y colas.</p>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+        <div class="reveal">
+            <h2 style="font-family: var(--ff-display); font-size: 3rem; margin-bottom: 2rem;">¿Quieres vivir la experiencia?</h2>
+            <p>Contáctanos para ventas mayoristas o visitas a la destilería en San Juan.</p>
+        </div>
+        <div class="reveal">
+            <form id="contact-form">
+                <input type="text" placeholder="NOMBRE" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--gris-luxe); padding: 1rem 0; color: #fff; margin-bottom: 2rem; font-family: var(--ff-body);">
+                <input type="email" placeholder="EMAIL" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--gris-luxe); padding: 1rem 0; color: #fff; margin-bottom: 2rem;">
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div>&copy; 2024 DELIRIO DESTILERÍA. TODOS LOS DERECHOS RESERVADOS.</div>
+    <div>BEBER CON MODERACIÓN. PROHIBIDA SU VENTA A MENORES DE 18 AÑOS.</div>
+</footer>
+
+<div class="cart-drawer" id="cart">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--ff-display); font-size: 2rem;">Tu Selección</h2>
+        <button onclick="toggleCart()" style="background: none; border: none; color: #fff; cursor: pointer; letter-spacing: 0.2em;">CERRAR [X]</button>
+    </div>
+    <div id="cart-items" style="text-align: center; margin-top: 5rem; color: #555;">
+        <p>Tu carrito está vacío.</p>
+    </div>
+</div>
+
+<script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    });
+
+    // Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // Cart Logic
+    let count = 0;
+    function toggleCart() {
+        document.getElementById('cart').classList.toggle('open');
+    }
+
+    function addToCart() {
+        count++;
+        document.getElementById('cart-count').innerText = count;
+        alert("Producto añadido a la colección.");
+    }
+</script>
+
+</body>
+</html>
