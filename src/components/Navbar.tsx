@@ -19,7 +19,7 @@ export function Navbar() {
       </Link>
 
       <div className="hidden md:flex items-center gap-10">
-        {['HERENCIA', 'DESTILADOS', 'PROCESO', 'CONTACTO'].map((item) => (
+        {['HERENCIA', 'DESTILADOS', 'CONTACTO'].map((item) => (
           <Link
             key={item}
             href={`/#${item.toLowerCase() === 'destilados' ? 'colección' : item.toLowerCase()}`}

@@ -18,7 +18,7 @@ export function Manifesto() {
         whileInView={{ opacity: 1, y: 0 }}
         className="text-2xl md:text-3xl font-serif text-white/90 italic leading-relaxed max-w-4xl mx-auto"
       >
-        "Delirio es un viaje. Es una invitación a la desconexión, donde lo mejor de los botánicos del desierto se encuentran con la vanguardia de la destilación artesanal."
+        "Delirio es un viaje. Nuestro objetivo es ofrecer experiencias únicas en cada copa, respetando la identidad del gin y explorando nuevos perfiles de sabor."
       </motion.p>
     </section>
   )

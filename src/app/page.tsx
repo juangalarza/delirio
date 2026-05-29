@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { StatsBanner } from "@/components/StatsBanner";
 import { Manifesto } from "@/components/Manifesto";
 import { Collection } from "@/components/Collection";
-import { Process } from "@/components/Process";
 import { B2B } from "@/components/B2B";
 import { Rewards } from "@/components/Rewards";
 import { Footer } from "@/components/Footer";
@@ -20,7 +19,6 @@ export default function Home() {
         <StatsBanner />
         <Manifesto />
         <Collection />
-        <Process />
         <B2B />
         <Rewards />
       </main>

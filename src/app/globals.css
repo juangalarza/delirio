@@ -48,9 +48,9 @@
 }
 
 @theme {
-  --font-sans: var(--font-roboto);
-  --font-serif: var(--font-roboto-condensed);
-  --font-condensed: var(--font-roboto-condensed);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-inter);
+  --font-condensed: var(--font-inter);
   
   --color-background: #0C0C0C;
   --color-foreground: #FFFFFF;

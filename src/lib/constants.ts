@@ -16,5 +16,23 @@ export const products = [
     description: 'Infusión de hierbas andinas y flores silvestres de la precordillera.',
     price: '$22.000',
     image: '/images/generated-1778549057001.png'
+  },
+  {
+    name: 'INDIVIDUAL + BOTÁNICOS',
+    description: 'El set perfecto de destilación artesanal que incluye botella de 750ml con infusión de enebro y mix de botánicos desérticos.',
+    price: '$26.000',
+    image: '/images/generated-1778549072341.png'
+  },
+  {
+    name: 'BOX 4 EN 1',
+    description: 'Exclusiva selección de miniaturas de la destilería. 4 botellas combinadas en un empaque de roble premium.',
+    price: '$38.000',
+    image: '/images/generated-1778549076048.png'
+  },
+  {
+    name: 'NEGRONI 750ml',
+    description: 'Elaborado bajo receta tradicional con nuestro gin de barrica de roble, vermut dulce de la casa y bitter alpino.',
+    price: '$29.000',
+    image: '/images/generated-1778549078456.png'
   }
 ]
