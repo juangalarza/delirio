@@ -5,6 +5,7 @@ import { Manifesto } from "@/components/Manifesto";
 import { Collection } from "@/components/Collection";
 import { B2B } from "@/components/B2B";
 import { Rewards } from "@/components/Rewards";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Orbs } from "@/components/Orbs";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Collection />
         <B2B />
         <Rewards />
+        <Contact />
       </main>
 
       <Footer />
