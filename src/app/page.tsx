@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { StatsBanner } from "@/components/StatsBanner";
-import { Esencia } from "@/components/Esencia";
 import { Manifesto } from "@/components/Manifesto";
 import { Collection } from "@/components/Collection";
 import { B2B } from "@/components/B2B";
@@ -19,8 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <StatsBanner />
-        <Esencia />
-        <Manifesto />
+<Manifesto />
         <Collection />
         <B2B />
         <Rewards />
