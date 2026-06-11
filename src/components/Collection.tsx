@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { products } from '@/lib/constants'
+import { formatPrice } from '@/lib/utils'
 
 export function Collection() {
   return (
@@ -43,7 +44,7 @@ export function Collection() {
                 </div>
                 <p className="text-sm font-sans text-white/60 mb-6 line-clamp-2">{product.description}</p>
                 <div className="flex items-center justify-between border-t border-white/10 pt-6">
-                  <span className="text-[24px] text-primary font-condensed">{product.price}</span>
+                  <span className="text-[24px] text-primary font-condensed">{formatPrice(product.price)}</span>
                   <button className="text-[16px] tracking-widest text-white hover:text-primary transition-colors">
                     VER PRODUCTO
                   </button>

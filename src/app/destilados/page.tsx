@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { Orbs } from "@/components/Orbs"
 import { products } from "@/lib/constants"
+import { formatPrice } from "@/lib/utils"
 
 export default function DestiladosPage() {
   return (
@@ -54,7 +55,7 @@ export default function DestiladosPage() {
                     {product.description}
                   </p>
                   <div className="flex items-center justify-between border-t border-white/10 pt-8">
-                    <span className="text-2xl text-primary font-condensed font-bold">{product.price}</span>
+                    <span className="text-2xl text-primary font-condensed font-bold">{formatPrice(product.price)}</span>
                     <button className="px-6 py-3 bg-primary text-black text-[10px] tracking-widest font-bold rounded-sm hover:bg-white transition-colors">
                       COMPRAR AHORA
                     </button>
