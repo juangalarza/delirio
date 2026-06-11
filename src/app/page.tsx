@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { StatsBanner } from "@/components/StatsBanner";
+import { Esencia } from "@/components/Esencia";
 import { Manifesto } from "@/components/Manifesto";
 import { Collection } from "@/components/Collection";
 import { B2B } from "@/components/B2B";
@@ -11,13 +12,14 @@ import { Orbs } from "@/components/Orbs";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0C0C0C]">
+    <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
       <Navbar />
-      
+
       <main>
         <Hero />
         <StatsBanner />
+        <Esencia />
         <Manifesto />
         <Collection />
         <B2B />

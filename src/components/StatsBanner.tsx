@@ -30,7 +30,7 @@ function Counter({ value, suffix = "" }: { value: number, suffix?: string }) {
 }
 
 const stats = [
-  { label: 'ABV', value: 43, suffix: '%' },
+  { label: 'BOTÁNICOS', value: 12, suffix: '+' }, // TODO: confirmar valor con cliente
   { label: 'DESTILADOS', value: 7, suffix: '' },
   { label: 'ARTESANAL', value: 100, suffix: '%' },
   { label: 'PREMIOS INTERNACIONALES', value: 15, suffix: '' },
@@ -46,7 +46,7 @@ export function StatsBanner() {
       >
         {stats.map((stat, i) => (
           <div key={stat.label} className="flex flex-col items-center text-center">
-            <span className="text-4xl md:text-6xl font-serif text-white font-bold">
+            <span className="text-4xl md:text-6xl font-serif text-foreground font-bold">
               <Counter value={stat.value} suffix={stat.suffix} />
             </span>
             <span className="text-[16px] tracking-widest text-primary font-condensed mt-2">

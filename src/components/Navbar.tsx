@@ -23,7 +23,7 @@ export function Navbar() {
           <Link
             key={item}
             href={`/#${item.toLowerCase() === 'destilados' ? 'colección' : item.toLowerCase()}`}
-            className="text-[16px] tracking-[0.2em] text-white hover:text-primary transition-colors font-condensed"
+            className="text-[16px] tracking-[0.2em] text-foreground hover:text-primary transition-colors font-condensed"
           >
             {item}
           </Link>

@@ -56,28 +56,6 @@ export function Hero() {
         </motion.button>
       </div>
 
-      {/* Trust Badge */}
-      <motion.div
-        initial={{ opacity: 0, y: -500 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-          mass: 1,
-          delay: 1
-        }}
-        className="absolute top-0 right-8 md:right-24 hidden md:block z-20"
-      >
-        <Image
-          src="/images/medalla gwa-2026.png"
-          alt="Medalla 2026 Best Craft Gin"
-          width={280}
-          height={270}
-          className="drop-shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
-          style={{ objectFit: 'contain', objectPosition: 'top' }}
-        />
-      </motion.div>
     </section>
   )
 }

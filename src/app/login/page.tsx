@@ -45,9 +45,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen w-screen flex items-center justify-center bg-[#0C0C0C] text-white px-4 py-16 overflow-hidden">
+    <div className="relative min-h-screen w-screen flex items-center justify-center bg-background text-foreground px-4 py-16 overflow-hidden">
       <Orbs />
-      
+
       {/* Decorative Gold Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -63,18 +63,18 @@ export default function LoginPage() {
               className="object-contain drop-shadow-[0_4px_20px_rgba(197,160,89,0.2)]"
             />
           </Link>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-sm tracking-[0.4em] text-primary font-condensed mb-2"
           >
             SOCIOS DE LA DESTILERÍA
           </motion.h2>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl font-serif font-bold uppercase tracking-widest text-white"
+            className="text-3xl font-serif font-bold uppercase tracking-widest text-foreground"
           >
             Iniciar Sesión
           </motion.h1>
@@ -85,21 +85,21 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass p-8 md:p-10 rounded-lg border border-white/5 relative overflow-hidden"
+          className="bg-white p-8 md:p-10 rounded-lg border border-black/8 shadow-sm relative overflow-hidden"
         >
           {/* Top subtle gold line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
           <form onSubmit={handleLogin} className="space-y-6">
-            
+
             {/* Error Notification */}
             <AnimatePresence mode="wait">
               {error && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="flex items-start gap-3 bg-red-950/40 border border-red-500/20 text-red-200 p-4 rounded-md text-sm"
+                  className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 p-4 rounded-md text-sm"
                 >
                   <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <span>{error}</span>
@@ -110,24 +110,24 @@ export default function LoginPage() {
             {/* Success Notification */}
             <AnimatePresence mode="wait">
               {success && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-start gap-3 bg-emerald-950/40 border border-emerald-500/20 text-emerald-200 p-4 rounded-md text-sm"
+                  className="flex items-start gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-md text-sm"
                 >
                   <div className="w-5 h-5 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin shrink-0" />
-                  <span>Acceso verificado. Redirigiendo a tu cava privada...</span>
+                  <span>Acceso verificado. Redirigiendo a tu cuenta...</span>
                 </motion.div>
               )}
             </AnimatePresence>
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="text-[12px] tracking-[0.2em] font-condensed text-white/50 block">
+              <label htmlFor="email" className="text-[12px] tracking-[0.2em] font-condensed text-foreground/50 block">
                 CORREO ELECTRÓNICO
               </label>
               <div className="relative group">
-                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-white/30 group-focus-within:text-primary transition-colors">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-foreground/30 group-focus-within:text-primary transition-colors">
                   <Mail className="w-4 h-4" />
                 </span>
                 <input
@@ -138,7 +138,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={loading || success}
-                  className="w-full pl-12 pr-4 py-4 bg-black/40 border border-white/10 rounded-sm text-sm placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans text-white disabled:opacity-50"
+                  className="w-full pl-12 pr-4 py-4 bg-black/[0.03] border border-black/10 rounded-sm text-sm placeholder:text-foreground/25 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans text-foreground disabled:opacity-50"
                 />
               </div>
             </div>
@@ -146,18 +146,18 @@ export default function LoginPage() {
             {/* Password Field */}
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <label htmlFor="password" className="text-[12px] tracking-[0.2em] font-condensed text-white/50 block">
+                <label htmlFor="password" className="text-[12px] tracking-[0.2em] font-condensed text-foreground/50 block">
                   CONTRASEÑA
                 </label>
-                <Link 
-                  href="#" 
-                  className="text-[11px] font-condensed tracking-widest text-primary hover:text-white transition-colors"
+                <Link
+                  href="#"
+                  className="text-[11px] font-condensed tracking-widest text-primary hover:text-foreground transition-colors"
                 >
                   ¿OLVIDASTE TU CONTRASEÑA?
                 </Link>
               </div>
               <div className="relative group">
-                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-white/30 group-focus-within:text-primary transition-colors">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-foreground/30 group-focus-within:text-primary transition-colors">
                   <Lock className="w-4 h-4" />
                 </span>
                 <input
@@ -168,13 +168,13 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={loading || success}
-                  className="w-full pl-12 pr-12 py-4 bg-black/40 border border-white/10 rounded-sm text-sm placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans text-white disabled:opacity-50"
+                  className="w-full pl-12 pr-12 py-4 bg-black/[0.03] border border-black/10 rounded-sm text-sm placeholder:text-foreground/25 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans text-foreground disabled:opacity-50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   disabled={loading || success}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-white/30 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-foreground/30 hover:text-foreground transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -185,13 +185,13 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading || success}
-              className="w-full py-4 bg-primary text-black font-bold text-xs tracking-[0.25em] uppercase rounded-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 mt-4 cursor-pointer"
+              className="w-full py-4 bg-primary text-black font-bold text-xs tracking-[0.25em] uppercase rounded-sm hover:bg-foreground hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 mt-4 cursor-pointer"
             >
               {loading ? (
                 <div className="w-4 h-4 rounded-full border-2 border-black border-t-transparent animate-spin" />
               ) : (
                 <>
-                  INGRESAR A LA CAVA
+                  INGRESAR
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -200,12 +200,12 @@ export default function LoginPage() {
           </form>
 
           {/* Card Footer */}
-          <div className="mt-8 pt-6 border-t border-white/5 text-center">
-            <p className="text-xs text-white/40 tracking-wider">
+          <div className="mt-8 pt-6 border-t border-black/5 text-center">
+            <p className="text-xs text-foreground/40 tracking-wider">
               ¿No tienes una cuenta de socio?{' '}
-              <Link 
-                href="/register" 
-                className="text-primary hover:text-white underline underline-offset-4 transition-colors font-semibold"
+              <Link
+                href="/register"
+                className="text-primary hover:text-foreground underline underline-offset-4 transition-colors font-semibold"
               >
                 Regístrate aquí
               </Link>

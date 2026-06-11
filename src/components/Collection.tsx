@@ -12,7 +12,7 @@ export function Collection() {
         <motion.h2
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          className="text-3xl md:text-4xl font-serif text-white mb-6 tracking-widest"
+          className="text-3xl md:text-4xl font-serif text-foreground mb-6 tracking-widest"
         >
           LOS DESTILADOS
         </motion.h2>
@@ -35,7 +35,12 @@ export function Collection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-serif text-white mb-2">{product.name}</h3>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-2xl font-serif text-white">{product.name}</h3>
+                  <span className="text-[9px] tracking-widest text-primary border border-primary/40 px-2 py-0.5 rounded-sm font-condensed font-bold shrink-0">
+                    {product.abv} VOL
+                  </span>
+                </div>
                 <p className="text-sm font-sans text-white/60 mb-6 line-clamp-2">{product.description}</p>
                 <div className="flex items-center justify-between border-t border-white/10 pt-6">
                   <span className="text-[24px] text-primary font-condensed">{product.price}</span>
@@ -55,7 +60,7 @@ export function Collection() {
         >
           <Link
             href="/destilados"
-            className="px-12 py-4 border border-white/10 text-white/50 text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm"
+            className="px-12 py-4 border border-black/10 text-foreground/50 text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm"
           >
             VER TODOS
           </Link>

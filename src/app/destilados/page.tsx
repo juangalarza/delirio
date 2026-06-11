@@ -9,7 +9,7 @@ import { products } from "@/lib/constants"
 
 export default function DestiladosPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0C0C0C]">
+    <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
       <Navbar />
       
@@ -20,8 +20,8 @@ export default function DestiladosPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-20"
           >
-            <h1 className="text-5xl md:text-7xl font-serif text-white mb-6">NUESTRA COLECCIÓN</h1>
-            <p className="text-white/50 max-w-2xl font-sans">
+            <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-6">NUESTRA COLECCIÓN</h1>
+            <p className="text-foreground/50 max-w-2xl font-sans">
               Explora la gama completa de Delirio. Cada botella es el resultado de una búsqueda incansable por la perfección y el respeto por los botánicos del desierto.
             </p>
           </motion.div>
@@ -44,7 +44,12 @@ export default function DestiladosPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                 
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-serif text-white mb-2">{product.name}</h3>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-3xl font-serif text-white">{product.name}</h3>
+                    <span className="text-[10px] tracking-widest text-primary border border-primary/40 px-2 py-0.5 rounded-sm font-condensed font-bold shrink-0">
+                      {product.abv} VOL
+                    </span>
+                  </div>
                   <p className="text-sm font-sans text-white/60 mb-8 leading-relaxed">
                     {product.description}
                   </p>
