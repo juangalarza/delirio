@@ -5,8 +5,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { products } from '@/lib/constants'
 import { formatPrice } from '@/lib/utils'
+import { useCartStore } from '@/store/cart'
 
 export function Collection() {
+  const { addItem, openCart } = useCartStore()
+
   return (
     <section id="colección" className="min-h-[calc(100vh-80px)] pt-24 pb-12 px-4 md:px-24">
       <div className="px-8 md:px-24">
@@ -43,10 +46,13 @@ export function Collection() {
                   </span>
                 </div>
                 <p className="text-sm font-sans text-white/60 mb-6 line-clamp-2">{product.description}</p>
-                <div className="flex items-center justify-between border-t border-white/10 pt-6">
-                  <span className="text-[24px] text-primary font-condensed">{formatPrice(product.price)}</span>
-                  <button className="text-[16px] tracking-widest text-white hover:text-primary transition-colors">
-                    VER PRODUCTO
+                <div className="flex items-center justify-between border-t border-white/10 pt-6 gap-3">
+                  <span className="text-[24px] text-primary font-condensed shrink-0">{formatPrice(product.price)}</span>
+                  <button
+                    onClick={() => { addItem({ id: product.id, slug: product.slug, name: product.name, price: product.price, image: product.image, abv: product.abv }); openCart() }}
+                    className="text-[11px] tracking-widest text-black bg-primary hover:bg-white hover:text-black px-4 py-2 rounded-sm font-condensed font-bold transition-colors"
+                  >
+                    AGREGAR
                   </button>
                 </div>
               </div>

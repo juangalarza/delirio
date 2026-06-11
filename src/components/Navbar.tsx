@@ -3,9 +3,12 @@
 import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
+import { useCartStore } from '@/store/cart'
 
 export function Navbar() {
+  const { openCart, totalCount } = useCartStore()
+  const count = totalCount()
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-8 md:px-24 bg-background/50 backdrop-blur-md">
       <Link href="/" className="flex items-center mt-2">
@@ -29,9 +32,17 @@ export function Navbar() {
           </Link>
         ))}
 
-        <button className="flex items-center gap-2 px-5 py-2 border border-primary text-primary rounded-sm hover:bg-primary hover:text-primary-foreground transition-all font-condensed">
+        <button
+          onClick={openCart}
+          className="relative flex items-center gap-2 px-5 py-2 border border-primary text-primary rounded-sm hover:bg-primary hover:text-black transition-all font-condensed cursor-pointer"
+        >
           <ShoppingBag className="w-4 h-4" />
           <span className="text-[16px] tracking-widest font-bold">CARRITO</span>
+          {count > 0 && (
+            <span className="absolute -top-2 -right-2 w-5 h-5 bg-primary text-black text-[10px] font-bold rounded-full flex items-center justify-center font-condensed">
+              {count > 9 ? '9+' : count}
+            </span>
+          )}
         </button>
       </div>
     </nav>

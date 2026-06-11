@@ -34,16 +34,16 @@ export function Hero() {
           transition={{ delay: 0.2 }}
           className="text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6"
         >
-          NUESTRA<br />ESCENCIA
+          NUESTRA<br />ESENCIA
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-lg md:text-xl text-white max-w-[700px] leading-relaxed mb-10 font-bold"
+          className="text-lg md:text-xl text-white/90 max-w-[700px] leading-relaxed mb-10 italic font-serif"
         >
-          En la Destilería Delirio creamos destilados artesanales que combinan tradición e innovación.
+          Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia que brindan experiencias únicas.
         </motion.p>
 
         <motion.button

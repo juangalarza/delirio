@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClientShell } from "@/components/ClientShell";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <ClientShell />
       </body>
     </html>
   );

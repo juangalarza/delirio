@@ -13,10 +13,13 @@ export type CartItem = {
 
 type CartStore = {
   items: CartItem[]
+  isOpen: boolean
   addItem: (item: Omit<CartItem, 'qty'>) => void
   removeItem: (id: number) => void
   updateQty: (id: number, qty: number) => void
   clearCart: () => void
+  openCart: () => void
+  closeCart: () => void
   totalCount: () => number
   subtotal: () => number
 }
@@ -25,6 +28,10 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      isOpen: false,
+
+      openCart: () => set({ isOpen: true }),
+      closeCart: () => set({ isOpen: false }),
 
       addItem: (item) => {
         set((state) => {
@@ -63,6 +70,7 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'delirio-cart',
+      partialize: (state) => ({ items: state.items }),
     }
   )
 )

@@ -7,8 +7,11 @@ import { Footer } from "@/components/Footer"
 import { Orbs } from "@/components/Orbs"
 import { products } from "@/lib/constants"
 import { formatPrice } from "@/lib/utils"
+import { useCartStore } from "@/store/cart"
 
 export default function DestiladosPage() {
+  const { addItem, openCart } = useCartStore()
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
@@ -54,10 +57,13 @@ export default function DestiladosPage() {
                   <p className="text-sm font-sans text-white/60 mb-8 leading-relaxed">
                     {product.description}
                   </p>
-                  <div className="flex items-center justify-between border-t border-white/10 pt-8">
-                    <span className="text-2xl text-primary font-condensed font-bold">{formatPrice(product.price)}</span>
-                    <button className="px-6 py-3 bg-primary text-black text-[10px] tracking-widest font-bold rounded-sm hover:bg-white transition-colors">
-                      COMPRAR AHORA
+                  <div className="flex items-center justify-between border-t border-white/10 pt-8 gap-3">
+                    <span className="text-2xl text-primary font-condensed font-bold shrink-0">{formatPrice(product.price)}</span>
+                    <button
+                      onClick={() => { addItem({ id: product.id, slug: product.slug, name: product.name, price: product.price, image: product.image, abv: product.abv }); openCart() }}
+                      className="px-5 py-3 bg-primary text-black text-[10px] tracking-widest font-bold rounded-sm hover:bg-white transition-colors font-condensed"
+                    >
+                      AGREGAR AL CARRITO
                     </button>
                   </div>
                 </div>
