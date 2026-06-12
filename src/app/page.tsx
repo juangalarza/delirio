@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { StatsBanner } from "@/components/StatsBanner";
@@ -8,6 +9,17 @@ import { Rewards } from "@/components/Rewards";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Orbs } from "@/components/Orbs";
+
+export const metadata: Metadata = {
+  title: 'Delirio Destilería | Gin Premium Argentino',
+  description: 'Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia que brindan experiencias únicas.',
+  openGraph: {
+    title: 'Delirio Destilería | Gin Premium Argentino',
+    description: 'Destilados artesanales con carácter propio. Descubrí la experiencia Delirio.',
+    type: 'website',
+    locale: 'es_AR',
+  },
+}
 
 export default function Home() {
   return (

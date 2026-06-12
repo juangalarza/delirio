@@ -11,8 +11,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Delirio Gin | Dark Luxury",
-  description: "Experience the premium taste of Delirio Gin.",
+  title: {
+    default: 'Delirio Destilería | Gin Premium Argentino',
+    template: '%s — Delirio Destilería',
+  },
+  description: 'Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://deliriogin.com'),
+  openGraph: {
+    siteName: 'Delirio Destilería',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
