@@ -34,7 +34,7 @@ export default function LoginPage() {
 
       setSuccess(true)
       setTimeout(() => {
-        router.push('/dashboard')
+        router.push('/cuenta')
         router.refresh()
       }, 1000)
     } catch (err: any) {

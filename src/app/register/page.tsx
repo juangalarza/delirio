@@ -59,7 +59,7 @@ export default function RegisterPage() {
 
       setSuccess(true)
       setTimeout(() => {
-        router.push('/dashboard')
+        router.push('/cuenta')
         router.refresh()
       }, 2500)
     } catch (err: any) {
