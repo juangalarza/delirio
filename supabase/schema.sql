@@ -1,47 +1,50 @@
 -- ============================================================
 -- Delirio Gin — Supabase Schema
--- Ejecutar en el SQL Editor de Supabase (orden importa)
+-- Idempotente: seguro de re-ejecutar
 -- ============================================================
 
 -- ─── Extensiones ─────────────────────────────────────────────
 create extension if not exists "uuid-ossp";
 
--- ─── Enum de estado de orden ─────────────────────────────────
-create type order_status as enum ('pending', 'paid', 'rejected');
+-- ─── Enum de estado de orden (idempotente) ───────────────────
+do $$ begin
+  create type order_status as enum ('pending', 'paid', 'rejected');
+exception when duplicate_object then null;
+end $$;
 
 -- ─── Tabla: products ─────────────────────────────────────────
 create table if not exists products (
-  id            integer primary key,
-  slug          text    not null unique,
-  name          text    not null,
-  description   text    not null default '',
-  long_description text not null default '',
-  price         integer not null,          -- ARS, sin decimales
-  abv           text    not null default '',
-  image         text    not null default '',
-  stock         integer not null default 0,
-  active        boolean not null default true,
-  created_at    timestamptz not null default now()
+  id               integer     primary key,
+  slug             text        not null unique,
+  name             text        not null,
+  description      text        not null default '',
+  long_description text        not null default '',
+  price            integer     not null,          -- ARS, sin decimales
+  abv              text        not null default '',
+  image            text        not null default '',
+  stock            integer     not null default 0,
+  active           boolean     not null default true,
+  created_at       timestamptz not null default now()
 );
 
 -- ─── Tabla: orders ───────────────────────────────────────────
 create table if not exists orders (
-  id              uuid        primary key default gen_random_uuid(),
-  user_id         uuid        references auth.users(id) on delete set null,
-  email           text        not null,
-  status          order_status not null default 'pending',
-  subtotal        integer     not null,    -- ARS
-  shipping_cost   integer     not null,    -- ARS
-  total           integer     not null,    -- ARS
-  contact         jsonb       not null default '{}',   -- { nombre, telefono }
-  shipping_address jsonb      not null default '{}',   -- { calle, ciudad, provincia, codigoPostal }
-  mp_payment_id   text,
-  created_at      timestamptz not null default now()
+  id               uuid         primary key default gen_random_uuid(),
+  user_id          uuid         references auth.users(id) on delete set null,
+  email            text         not null,
+  status           order_status not null default 'pending',
+  subtotal         integer      not null,    -- ARS
+  shipping_cost    integer      not null,    -- ARS
+  total            integer      not null,    -- ARS
+  contact          jsonb        not null default '{}',  -- { nombre, telefono }
+  shipping_address jsonb        not null default '{}',  -- { calle, ciudad, provincia, codigoPostal }
+  mp_payment_id    text,
+  created_at       timestamptz  not null default now()
 );
 
-create index if not exists orders_email_idx   on orders (email);
-create index if not exists orders_user_id_idx on orders (user_id);
-create index if not exists orders_status_idx  on orders (status);
+create index if not exists orders_email_idx    on orders (email);
+create index if not exists orders_user_id_idx  on orders (user_id);
+create index if not exists orders_status_idx   on orders (status);
 
 -- ─── Tabla: order_items ──────────────────────────────────────
 create table if not exists order_items (
@@ -63,40 +66,49 @@ alter table products    enable row level security;
 alter table orders      enable row level security;
 alter table order_items enable row level security;
 
--- ─── products: lectura pública de productos activos ──────────
+-- ─── products ────────────────────────────────────────────────
+drop policy if exists "products_public_read"       on products;
+
 create policy "products_public_read"
   on products for select
   using (active = true);
 
--- ─── orders: inserción anónima (checkout sin login) ──────────
+-- ─── orders ──────────────────────────────────────────────────
+drop policy if exists "orders_insert_anon"         on orders;
+drop policy if exists "orders_select_owner"        on orders;
+
+-- Cualquiera puede insertar (checkout sin login)
 create policy "orders_insert_anon"
   on orders for insert
   with check (true);
 
--- ─── orders: el dueño ve sus propias órdenes ─────────────────
--- Acceso por user_id (autenticado) o por email (anónimo con link)
+-- El dueño ve sus propias órdenes.
+-- auth.uid() para usuarios autenticados; auth.email() para anónimos con sesión de email.
 create policy "orders_select_owner"
   on orders for select
   using (
     auth.uid() = user_id
-    or auth.jwt() ->> 'email' = email
+    or auth.email() = email
   );
 
--- ─── order_items: inserción anónima (durante checkout) ───────
+-- ─── order_items ─────────────────────────────────────────────
+drop policy if exists "order_items_insert_anon"    on order_items;
+drop policy if exists "order_items_select_owner"   on order_items;
+
 create policy "order_items_insert_anon"
   on order_items for insert
   with check (true);
 
--- ─── order_items: el dueño ve los items de sus órdenes ───────
 create policy "order_items_select_owner"
   on order_items for select
   using (
     exists (
-      select 1 from orders o
-      where o.id = order_items.order_id
-        and (
-          auth.uid() = o.user_id
-          or auth.jwt() ->> 'email' = o.email
+      select 1
+      from   orders o
+      where  o.id = order_items.order_id
+        and  (
+          auth.uid()   = o.user_id
+          or auth.email() = o.email
         )
     )
   );
@@ -144,11 +156,11 @@ values
     29000, '25%', '/images/generated-1778549078456.png', 30, true
   )
 on conflict (id) do update set
-  slug          = excluded.slug,
-  name          = excluded.name,
-  description   = excluded.description,
+  slug             = excluded.slug,
+  name             = excluded.name,
+  description      = excluded.description,
   long_description = excluded.long_description,
-  price         = excluded.price,
-  abv           = excluded.abv,
-  image         = excluded.image,
-  active        = excluded.active;
+  price            = excluded.price,
+  abv              = excluded.abv,
+  image            = excluded.image,
+  active           = excluded.active;
