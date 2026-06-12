@@ -34,7 +34,7 @@ export function Hero() {
           transition={{ delay: 0.2 }}
           className="text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6"
         >
-          NUESTRA<br />ESENCIA
+          ESENCIA
         </motion.h1>
 
         <motion.p
