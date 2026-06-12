@@ -42,7 +42,7 @@ export function StatsBanner() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        className="w-full max-w-7xl h-auto md:h-[160px] py-10 md:py-0 rounded-2xl glass flex flex-col md:flex-row items-center justify-around px-8 md:px-16 gap-8 md:gap-4"
+        className="w-full max-w-7xl h-auto md:h-[160px] py-10 md:py-0 rounded-2xl bg-[#F5F2EC] border border-black/10 flex flex-col md:flex-row items-center justify-around px-8 md:px-16 gap-8 md:gap-4"
       >
         {stats.map((stat, i) => (
           <div key={stat.label} className="flex flex-col items-center text-center">

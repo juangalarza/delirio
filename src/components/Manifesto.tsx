@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export function Manifesto() {
   return (
-    <section id="herencia" className="py-32 px-24 flex flex-col items-center justify-center text-center">
+    <section id="herencia" className="py-32 px-24 flex flex-col items-center justify-center text-center bg-[#FAFAF8] border-t border-b border-black/[0.05]">
       <motion.span
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

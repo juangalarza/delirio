@@ -170,7 +170,7 @@ export function Rewards() {
               {[...row1, ...row1].map((reward, i) => (
                 <div
                   key={`r1-${i}`}
-                  className="group relative bg-white border border-black/5 hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
+                  className="group relative bg-white border border-black/[0.08] hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.04)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
@@ -210,7 +210,7 @@ export function Rewards() {
               {[...row2, ...row2].map((reward, i) => (
                 <div
                   key={`r2-${i}`}
-                  className="group relative bg-white border border-black/5 hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
+                  className="group relative bg-white border border-black/[0.08] hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.04)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <div className="w-16 h-16 relative flex items-center justify-center shrink-0">

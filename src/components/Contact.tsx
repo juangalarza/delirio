@@ -86,7 +86,7 @@ export function Contact() {
                 viewport={{ once: true }}
                 className="flex items-start gap-5 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-black/[0.03] border border-black/5 group-hover:border-primary/20 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-black/[0.05] border border-black/[0.08] group-hover:border-primary/30 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
@@ -105,7 +105,7 @@ export function Contact() {
                 viewport={{ once: true }}
                 className="flex items-start gap-5 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-black/[0.03] border border-black/5 group-hover:border-primary/20 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-black/[0.05] border border-black/[0.08] group-hover:border-primary/30 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
@@ -126,7 +126,7 @@ export function Contact() {
                 viewport={{ once: true }}
                 className="flex items-start gap-5 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-black/[0.03] border border-black/5 group-hover:border-primary/20 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-black/[0.05] border border-black/[0.08] group-hover:border-primary/30 flex items-center justify-center text-primary shrink-0 transition-colors duration-300">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
@@ -150,7 +150,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             viewport={{ once: true }}
-            className="w-full bg-white border border-black/8 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-sm"
+            className="w-full bg-white border border-black/[0.10] rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.07)]"
           >
             {/* Top gold line */}
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -187,7 +187,7 @@ export function Contact() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         disabled={submitting}
-                        className="w-full pl-11 pr-4 py-3 bg-black/[0.03] border border-black/10 rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
+                        className="w-full pl-11 pr-4 py-3 bg-[#F7F4EF] border border-black/[0.12] rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
                       />
                     </div>
                   </div>
@@ -209,7 +209,7 @@ export function Contact() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         disabled={submitting}
-                        className="w-full pl-11 pr-4 py-3 bg-black/[0.03] border border-black/10 rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
+                        className="w-full pl-11 pr-4 py-3 bg-[#F7F4EF] border border-black/[0.12] rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
                       />
                     </div>
                   </div>
@@ -231,7 +231,7 @@ export function Contact() {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         disabled={submitting}
-                        className="w-full pl-11 pr-4 py-3 bg-black/[0.03] border border-black/10 rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
+                        className="w-full pl-11 pr-4 py-3 bg-[#F7F4EF] border border-black/[0.12] rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30"
                       />
                     </div>
                   </div>
@@ -249,7 +249,7 @@ export function Contact() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       disabled={submitting}
-                      className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30 h-[120px] resize-none leading-relaxed"
+                      className="w-full px-4 py-3 bg-[#F7F4EF] border border-black/[0.12] rounded-sm text-xs text-foreground focus:outline-none focus:border-primary transition-all font-sans placeholder:text-foreground/30 h-[120px] resize-none leading-relaxed"
                     />
                   </div>
 

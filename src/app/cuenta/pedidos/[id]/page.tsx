@@ -131,7 +131,7 @@ export default function OrderDetailPage() {
             </div>
 
             {/* Items */}
-            <section className="border border-black/5 rounded-sm overflow-hidden mb-4">
+            <section className="border border-black/[0.08] rounded-sm overflow-hidden mb-4">
               <div className="px-5 py-3 border-b border-black/5 bg-black/[0.015]">
                 <p className="text-[10px] tracking-[0.3em] font-condensed text-foreground/40">PRODUCTOS</p>
               </div>
@@ -155,7 +155,7 @@ export default function OrderDetailPage() {
             </section>
 
             {/* Totals */}
-            <section className="border border-black/5 rounded-sm p-5 mb-4 bg-black/[0.01]">
+            <section className="border border-black/[0.08] rounded-sm p-5 mb-4 bg-black/[0.01]">
               <div className="space-y-2.5">
                 <div className="flex justify-between text-sm font-sans text-foreground/60">
                   <span>Subtotal</span>
@@ -174,7 +174,7 @@ export default function OrderDetailPage() {
 
             {/* Shipping & Contact */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <section className="border border-black/5 rounded-sm p-5">
+              <section className="border border-black/[0.08] rounded-sm p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <MapPin className="w-3.5 h-3.5 text-primary" />
                   <p className="text-[10px] tracking-[0.3em] font-condensed text-foreground/40">DIRECCIÓN</p>
@@ -185,7 +185,7 @@ export default function OrderDetailPage() {
                   CP {order.shipping_address.codigoPostal}
                 </p>
               </section>
-              <section className="border border-black/5 rounded-sm p-5">
+              <section className="border border-black/[0.08] rounded-sm p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <User className="w-3.5 h-3.5 text-primary" />
                   <p className="text-[10px] tracking-[0.3em] font-condensed text-foreground/40">CONTACTO</p>

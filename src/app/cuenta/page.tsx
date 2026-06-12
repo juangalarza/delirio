@@ -111,7 +111,7 @@ export default function CuentaPage() {
             </h2>
 
             {orders.length === 0 ? (
-              <div className="border border-black/5 rounded-sm p-12 text-center bg-black/[0.01]">
+              <div className="border border-black/[0.08] rounded-sm p-12 text-center bg-black/[0.01]">
                 <Package className="w-8 h-8 text-foreground/15 mx-auto mb-3" />
                 <p className="text-foreground/40 font-sans text-sm">
                   Todavía no realizaste ningún pedido.
@@ -134,7 +134,7 @@ export default function CuentaPage() {
                     <Link
                       key={order.id}
                       href={`/cuenta/pedidos/${order.id}`}
-                      className="flex items-center justify-between p-5 border border-black/5 rounded-sm bg-white hover:border-primary/20 hover:shadow-sm transition-all group"
+                      className="flex items-center justify-between p-5 border border-black/[0.08] rounded-sm bg-white hover:border-primary/20 hover:shadow-sm transition-all group"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">

@@ -45,7 +45,7 @@ function SuccessContent() {
           coordinar el envío.
         </p>
 
-        <div className="border border-black/5 rounded-sm p-4 flex items-center gap-3 text-left mb-8 bg-black/[0.01]">
+        <div className="border border-black/[0.08] rounded-sm p-4 flex items-center gap-3 text-left mb-8 bg-black/[0.01]">
           <Package className="w-5 h-5 text-primary shrink-0" />
           <div>
             <p className="text-xs font-condensed font-bold text-foreground">

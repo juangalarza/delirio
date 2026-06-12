@@ -71,7 +71,7 @@ export function Collection() {
         >
           <Link
             href="/destilados"
-            className="px-12 py-4 border border-black/10 text-foreground/50 text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm"
+            className="px-12 py-4 border border-black/20 text-foreground/70 text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm"
           >
             VER TODOS
           </Link>

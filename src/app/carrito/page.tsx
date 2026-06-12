@@ -82,7 +82,7 @@ export default function CarritoPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, x: 60 }}
                       transition={{ duration: 0.25 }}
-                      className="flex gap-5 p-5 bg-white border border-black/5 rounded-lg shadow-sm"
+                      className="flex gap-5 p-5 bg-white border border-black/[0.08] rounded-lg shadow-sm"
                     >
                       {/* Image */}
                       <div className="relative w-20 h-24 rounded-sm overflow-hidden shrink-0 bg-black/[0.04]">
@@ -160,7 +160,7 @@ export default function CarritoPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="bg-white border border-black/5 rounded-lg p-6 shadow-sm space-y-5 lg:sticky lg:top-28"
+                className="bg-white border border-black/[0.08] rounded-lg p-6 shadow-sm space-y-5 lg:sticky lg:top-28"
               >
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-t-lg overflow-hidden" />
 

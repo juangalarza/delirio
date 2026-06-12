@@ -56,7 +56,7 @@ export default function EnviosPage() {
 
           <Section title="3. TIEMPOS DE ENTREGA">
             <p>Los plazos estimados de entrega son:</p>
-            <div className="border border-black/5 rounded-sm overflow-hidden mt-4">
+            <div className="border border-black/[0.08] rounded-sm overflow-hidden mt-4">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-black/[0.02] border-b border-black/5">

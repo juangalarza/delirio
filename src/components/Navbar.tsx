@@ -10,7 +10,7 @@ export function Navbar() {
   const count = totalCount()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-8 md:px-24 bg-background/50 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-8 md:px-24 bg-background/85 backdrop-blur-md border-b border-black/[0.07] shadow-[0_1px_10px_rgba(0,0,0,0.06)]">
       <Link href="/" className="flex items-center mt-2">
         <Image
           src="/images/logo-nav.png"
