@@ -82,14 +82,11 @@ create policy "orders_insert_anon"
   on orders for insert
   with check (true);
 
--- El dueño ve sus propias órdenes.
--- auth.uid() para usuarios autenticados; auth.email() para anónimos con sesión de email.
+-- El dueño ve sus propias órdenes (requiere sesión autenticada).
+-- El service role bypasea RLS, por lo que los API routes siempre tienen acceso.
 create policy "orders_select_owner"
   on orders for select
-  using (
-    auth.uid() = user_id
-    or auth.email() = email
-  );
+  using (auth.uid() = user_id);
 
 -- ─── order_items ─────────────────────────────────────────────
 drop policy if exists "order_items_insert_anon"    on order_items;
@@ -106,10 +103,7 @@ create policy "order_items_select_owner"
       select 1
       from   orders o
       where  o.id = order_items.order_id
-        and  (
-          auth.uid()   = o.user_id
-          or auth.email() = o.email
-        )
+        and  auth.uid() = o.user_id
     )
   );
 
