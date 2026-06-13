@@ -1,7 +1,6 @@
 import { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { MercadoPagoService } from '@/lib/mercadopago'
-import { products, type Product } from '@/lib/constants'
 
 const SHIPPING_COST = 3500 // TODO: integrate OCAService.calculateShipping
 
@@ -15,7 +14,7 @@ function createServiceClient() {
 export async function POST(request: NextRequest) {
   const body = await request.json()
   const { items, contact, shipping } = body as {
-    items: { id: number; qty: number }[]
+    items: { id: string; qty: number }[]
     contact: { nombre: string; email: string; telefono: string }
     shipping: { calle: string; ciudad: string; provincia: string; codigoPostal: string }
   }
@@ -24,26 +23,40 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: 'Datos incompletos' }, { status: 400 })
   }
 
-  // Server-side price validation — never trust client prices
-  const validated: { product: Product; qty: number }[] = []
+  // Validate all quantities
   for (const item of items) {
-    const product = products.find((p) => p.id === item.id)
+    if (!Number.isInteger(item.qty) || item.qty < 1) {
+      return Response.json({ error: `Cantidad inválida para producto ${item.id}` }, { status: 400 })
+    }
+  }
+
+  // Server-side price validation against Supabase — never trust client prices
+  const db = createServiceClient()
+  const ids = items.map((i) => i.id)
+  const { data: dbProducts, error: dbError } = await db
+    .from('products')
+    .select('id, name, price')
+    .in('id', ids)
+
+  if (dbError || !dbProducts?.length) {
+    return Response.json({ error: 'Error al validar productos' }, { status: 400 })
+  }
+
+  const validated: { id: string; name: string; price: number; qty: number }[] = []
+  for (const item of items) {
+    const product = dbProducts.find((p) => p.id === item.id)
     if (!product) {
       return Response.json({ error: `Producto ${item.id} no encontrado` }, { status: 400 })
     }
-    if (!Number.isInteger(item.qty) || item.qty < 1) {
-      return Response.json({ error: `Cantidad inválida para ${product.name}` }, { status: 400 })
-    }
-    validated.push({ product, qty: item.qty })
+    validated.push({ id: product.id, name: product.name, price: product.price, qty: item.qty })
   }
 
-  const subtotal = validated.reduce((sum, { product, qty }) => sum + product.price * qty, 0)
+  const subtotal = validated.reduce((sum, p) => sum + p.price * p.qty, 0)
   const total = subtotal + SHIPPING_COST
 
-  // Create order in Supabase (best-effort; continues with temp ID if DB not configured)
+  // Create order in Supabase
   let orderId = `tmp-${Date.now()}`
   try {
-    const db = createServiceClient()
     const { data: order } = await db
       .from('orders')
       .insert({
@@ -61,26 +74,26 @@ export async function POST(request: NextRequest) {
     if (order?.id) {
       orderId = order.id
       await db.from('order_items').insert(
-        validated.map(({ product, qty }) => ({
+        validated.map((p) => ({
           order_id: orderId,
-          product_id: product.id,
-          name: product.name,
-          price: product.price,
-          qty,
+          product_id: p.id,
+          name: p.name,
+          price: p.price,
+          qty: p.qty,
         }))
       )
     }
   } catch {
-    // DB not configured yet — proceed with temp orderId
+    // DB not configured — proceed with temp orderId
   }
 
   // Create MercadoPago preference
   try {
-    const mpItems = validated.map(({ product, qty }) => ({
-      id: String(product.id),
-      title: product.name,
-      quantity: qty,
-      unit_price: product.price,
+    const mpItems = validated.map((p) => ({
+      id: p.id,
+      title: p.name,
+      quantity: p.qty,
+      unit_price: p.price,
       currency_id: 'ARS',
     }))
 

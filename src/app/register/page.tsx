@@ -57,9 +57,25 @@ export default function RegisterPage() {
 
       if (authError) throw authError
 
+      // Role is set in user_metadata during signUp — use it directly.
+      // If a users table row was created by a DB trigger, that takes precedence.
+      let destination = '/cuenta'
+      try {
+        const { data: profile } = await supabase
+          .from('users')
+          .select('role')
+          .eq('id', data.user!.id)
+          .single()
+
+        const resolvedRole = profile?.role ?? data.user?.user_metadata?.role
+        if (resolvedRole === 'administrador') destination = '/dashboard'
+      } catch {
+        if (data.user?.user_metadata?.role === 'administrador') destination = '/dashboard'
+      }
+
       setSuccess(true)
       setTimeout(() => {
-        router.push('/cuenta')
+        router.push(destination)
         router.refresh()
       }, 2500)
     } catch (err: any) {

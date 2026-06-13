@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   },
   description: 'Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://deliriogin.com'),
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
   openGraph: {
     siteName: 'Delirio Destilería',
     locale: 'es_AR',

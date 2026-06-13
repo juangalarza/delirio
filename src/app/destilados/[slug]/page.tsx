@@ -1,7 +1,7 @@
 'use client'
 
 import { useParams, notFound } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -9,20 +9,56 @@ import { Minus, Plus, ShoppingBag, ArrowLeft, ChevronRight } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Orbs } from '@/components/Orbs'
-import { products } from '@/lib/constants'
+import { supabase } from '@/lib/supabase'
+import type { Product } from '@/lib/constants'
 import { formatPrice } from '@/lib/utils'
 import { useCartStore } from '@/store/cart'
 
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
-  const product = products.find((p) => p.slug === slug)
-
-  if (!product) notFound()
-
+  const [product, setProduct] = useState<Product | null>(null)
+  const [related, setRelated] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   const [qty, setQty] = useState(1)
   const { addItem, openCart } = useCartStore()
 
-  const related = products.filter((p) => p.id !== product.id).slice(0, 3)
+  useEffect(() => {
+    if (!slug) return
+    supabase
+      .from('products')
+      .select('*')
+      .eq('slug', slug)
+      .single()
+      .then(({ data }) => {
+        setProduct(data || null)
+        setLoading(false)
+      })
+  }, [slug])
+
+  useEffect(() => {
+    if (!product) return
+    supabase
+      .from('products')
+      .select('id, slug, name, abv, price, image_url')
+      .neq('id', product.id)
+      .limit(3)
+      .then(({ data }) => setRelated(data || []))
+  }, [product])
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-background">
+        <Orbs />
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+
+  if (!product) notFound()
 
   const handleAddToCart = () => {
     for (let i = 0; i < qty; i++) {
@@ -31,8 +67,8 @@ export default function ProductPage() {
         slug: product.slug,
         name: product.name,
         price: product.price,
-        image: product.image,
-        abv: product.abv,
+        image: product.image_url,
+        abv: product.abv || '',
       })
     }
     openCart()
@@ -68,13 +104,12 @@ export default function ProductPage() {
               className="relative aspect-[3/4] rounded-xl overflow-hidden bg-black/[0.04] lg:sticky lg:top-28"
             >
               <Image
-                src={product.image}
+                src={product.image_url}
                 alt={product.name}
                 fill
                 className="object-cover"
                 priority
               />
-              {/* Subtle gold top line */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
             </motion.div>
 
@@ -88,9 +123,11 @@ export default function ProductPage() {
               {/* ABV badge + name */}
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[10px] tracking-[0.3em] text-primary font-condensed font-bold border border-primary/40 px-3 py-1 rounded-sm">
-                    {product.abv} VOL
-                  </span>
+                  {product.abv && (
+                    <span className="text-[10px] tracking-[0.3em] text-primary font-condensed font-bold border border-primary/40 px-3 py-1 rounded-sm">
+                      {product.abv} VOL
+                    </span>
+                  )}
                   <span className="text-[10px] tracking-[0.3em] text-foreground/30 font-condensed">DESTILADO ARTESANAL</span>
                 </div>
                 <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground tracking-wide leading-tight">
@@ -112,9 +149,11 @@ export default function ProductPage() {
               </p>
 
               {/* Long description */}
-              <p className="text-sm font-sans text-foreground/50 leading-loose">
-                {product.longDescription}
-              </p>
+              {product.long_description && (
+                <p className="text-sm font-sans text-foreground/50 leading-loose">
+                  {product.long_description}
+                </p>
+              )}
 
               {/* Quantity selector + Add to cart */}
               <div className="space-y-4 pt-2">
@@ -154,7 +193,6 @@ export default function ProductPage() {
                 </p>
               </div>
 
-              {/* Divider */}
               <div className="border-t border-black/5 pt-6">
                 <Link
                   href="/destilados"
@@ -170,57 +208,61 @@ export default function ProductPage() {
         </div>
 
         {/* También te puede interesar */}
-        <div className="px-6 md:px-24 mt-28">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-10"
-            >
-              <span className="text-[10px] tracking-[0.4em] text-primary font-condensed font-bold mb-3 block">
-                COLECCIÓN DELIRIO
-              </span>
-              <h2 className="text-3xl md:text-4xl font-serif text-foreground tracking-wide">
-                También te puede interesar
-              </h2>
-            </motion.div>
+        {related.length > 0 && (
+          <div className="px-6 md:px-24 mt-28">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mb-10"
+              >
+                <span className="text-[10px] tracking-[0.4em] text-primary font-condensed font-bold mb-3 block">
+                  COLECCIÓN DELIRIO
+                </span>
+                <h2 className="text-3xl md:text-4xl font-serif text-foreground tracking-wide">
+                  También te puede interesar
+                </h2>
+              </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {related.map((p, i) => (
-                <motion.div
-                  key={p.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Link
-                    href={`/destilados/${p.slug}`}
-                    className="group relative h-[400px] rounded-lg overflow-hidden flex flex-col justify-end block"
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {related.map((p, i) => (
+                  <motion.div
+                    key={p.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
                   >
-                    <Image
-                      src={p.image}
-                      alt={p.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                    <div className="relative z-10 p-6">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-lg font-serif text-white">{p.name}</h3>
-                        <span className="text-[8px] tracking-widest text-primary border border-primary/40 px-1.5 py-0.5 rounded-sm font-condensed font-bold shrink-0">
-                          {p.abv}
-                        </span>
+                    <Link
+                      href={`/destilados/${p.slug}`}
+                      className="group relative h-[400px] rounded-lg overflow-hidden flex flex-col justify-end block"
+                    >
+                      <Image
+                        src={p.image_url}
+                        alt={p.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                      <div className="relative z-10 p-6">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-lg font-serif text-white">{p.name}</h3>
+                          {p.abv && (
+                            <span className="text-[8px] tracking-widest text-primary border border-primary/40 px-1.5 py-0.5 rounded-sm font-condensed font-bold shrink-0">
+                              {p.abv}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[13px] font-condensed font-bold text-primary">{formatPrice(p.price)}</p>
                       </div>
-                      <p className="text-[13px] font-condensed font-bold text-primary">{formatPrice(p.price)}</p>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
       </main>
 

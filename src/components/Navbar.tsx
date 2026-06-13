@@ -1,24 +1,47 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useCartStore } from '@/store/cart'
 
 export function Navbar() {
   const { openCart, totalCount } = useCartStore()
   const count = totalCount()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-8 md:px-24 bg-background/85 backdrop-blur-md border-b border-black/[0.07] shadow-[0_1px_10px_rgba(0,0,0,0.06)]">
+    <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-8 md:px-24 transition-all duration-500 ease-in-out ${
+      scrolled
+        ? 'bg-white/95 backdrop-blur-md border-b border-black/[0.07] shadow-[0_1px_10px_rgba(0,0,0,0.06)]'
+        : 'bg-transparent'
+    }`}>
       <Link href="/" className="flex items-center mt-2">
-        <Image
-          src="/images/logo-nav.png"
-          alt="Delirio Logo"
-          width={180}
-          height={60}
-          className="object-contain"
-        />
+        <div className="relative h-[60px] w-[180px] overflow-hidden">
+          {/* Logo blanco/crema — navbar transparente sobre hero */}
+          <img
+            src="/images/logo-nav-white.png"
+            alt="Delirio Destilería"
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-auto max-w-none transition-opacity duration-500 ${
+              scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          />
+          {/* Logo negro — navbar blanco al scrollear */}
+          <img
+            src="/images/logo-nav.png"
+            alt="Delirio Destilería"
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-auto max-w-none transition-opacity duration-500 ${
+              scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          />
+        </div>
       </Link>
 
       <div className="hidden md:flex items-center gap-10">
@@ -26,7 +49,11 @@ export function Navbar() {
           <Link
             key={item}
             href={`/#${item.toLowerCase() === 'destilados' ? 'colección' : item.toLowerCase()}`}
-            className="text-[16px] tracking-[0.2em] text-foreground hover:text-primary transition-colors font-condensed"
+            className={`text-[16px] tracking-[0.2em] transition-colors duration-300 font-condensed ${
+              scrolled
+                ? 'text-foreground hover:text-primary'
+                : 'text-white/90 hover:text-white'
+            }`}
           >
             {item}
           </Link>
@@ -34,7 +61,11 @@ export function Navbar() {
 
         <button
           onClick={openCart}
-          className="relative flex items-center gap-2 px-5 py-2 border border-primary text-primary rounded-sm hover:bg-primary hover:text-black transition-all font-condensed cursor-pointer"
+          className={`relative flex items-center gap-2 px-5 py-2 border rounded-sm transition-all duration-300 font-condensed cursor-pointer ${
+            scrolled
+              ? 'border-primary text-primary hover:bg-primary hover:text-black'
+              : 'border-white/70 text-white hover:bg-white hover:text-black'
+          }`}
         >
           <ShoppingBag className="w-4 h-4" />
           <span className="text-[16px] tracking-widest font-bold">CARRITO</span>

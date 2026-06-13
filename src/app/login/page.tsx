@@ -32,9 +32,25 @@ export default function LoginPage() {
 
       if (authError) throw authError
 
+      // Determine destination by querying users table (same as dashboard layout).
+      // Falls back to user_metadata if no DB row exists.
+      let destination = '/cuenta'
+      try {
+        const { data: profile } = await supabase
+          .from('users')
+          .select('role')
+          .eq('id', data.user!.id)
+          .single()
+
+        const role = profile?.role ?? data.user?.user_metadata?.role
+        if (role === 'administrador') destination = '/dashboard'
+      } catch {
+        if (data.user?.user_metadata?.role === 'administrador') destination = '/dashboard'
+      }
+
       setSuccess(true)
       setTimeout(() => {
-        router.push('/cuenta')
+        router.push(destination)
         router.refresh()
       }, 1000)
     } catch (err: any) {

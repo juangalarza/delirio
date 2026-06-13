@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export type CartItem = {
-  id: number
+  id: string
   slug: string
   name: string
   price: number
@@ -15,8 +15,8 @@ type CartStore = {
   items: CartItem[]
   isOpen: boolean
   addItem: (item: Omit<CartItem, 'qty'>) => void
-  removeItem: (id: number) => void
-  updateQty: (id: number, qty: number) => void
+  removeItem: (id: string) => void
+  updateQty: (id: string, qty: number) => void
   clearCart: () => void
   openCart: () => void
   closeCart: () => void
@@ -70,6 +70,7 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'delirio-cart',
+      version: 2, // bump version to clear old carts with numeric ids
       partialize: (state) => ({ items: state.items }),
     }
   )

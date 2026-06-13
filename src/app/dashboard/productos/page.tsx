@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Plus, Tag, RefreshCw, AlertTriangle, Eye, Trash2, Edit } from 'lucide-react'
+import { Plus, Tag, RefreshCw, AlertTriangle, Trash2, Edit } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export default function ProductosPage() {
@@ -208,13 +208,13 @@ export default function ProductosPage() {
                     <td className="py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         {/* Edit Item */}
-                        <button
-                          disabled={deletingId === product.id}
-                          className="p-2 border border-white/5 bg-[#141413] hover:border-primary/20 text-white/40 hover:text-primary rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                        <Link
+                          href={`/dashboard/productos/${product.id}/editar`}
+                          className="p-2 border border-white/5 bg-[#141413] hover:border-primary/20 text-white/40 hover:text-primary rounded-xl transition-all cursor-pointer"
                           title="Editar Producto"
                         >
                           <Edit className="w-3.5 h-3.5" />
-                        </button>
+                        </Link>
                         
                         {/* Delete Item */}
                         <button
