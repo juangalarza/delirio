@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft, Save, AlertTriangle, CheckCircle2, Image as ImageIcon } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
 
 export default function NuevoProductoPage() {
   const router = useRouter()
@@ -22,6 +21,8 @@ export default function NuevoProductoPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [availableImages, setAvailableImages] = useState<string[]>([])
+  const [imagesLoading, setImagesLoading] = useState(false)
 
   // Auto-generate slug from Name when typing
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,28 +68,37 @@ export default function NuevoProductoPage() {
       return
     }
 
-    // Default image if empty
     const imgToSave = imageUrl.trim() || '/images/productos/generated-1778549037715.png'
 
     try {
-      const { data, error: dbError } = await supabase
-        .from('products')
-        .insert([
-          {
-            name: name.trim(),
-            slug: slug.trim(),
-            description: description.trim(),
-            long_description: longDescription.trim(),
-            abv: abv.trim(),
-            price: priceNum,
-            stock: stockNum,
-            category: category.trim(),
-            image_url: imgToSave,
-            is_exclusive: isExclusive,
-          }
-        ])
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 15000)
 
-      if (dbError) throw dbError
+      const res = await fetch('/api/dashboard/products', {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          slug: slug.trim(),
+          description: description.trim(),
+          long_description: longDescription.trim(),
+          abv: abv.trim(),
+          price: priceNum,
+          stock: stockNum,
+          category: category.trim(),
+          image_url: imgToSave,
+          is_exclusive: isExclusive,
+        }),
+      })
+      clearTimeout(timeoutId)
+
+      if (!res.ok) {
+        const { error } = await res.json()
+        throw new Error(error || 'Error al guardar')
+      }
 
       setSuccess(true)
       setTimeout(() => {
@@ -96,8 +106,11 @@ export default function NuevoProductoPage() {
         router.refresh()
       }, 1500)
     } catch (err: any) {
-      console.error('Error creating product:', err)
-      setError(err.message || 'Error de base de datos al guardar el producto. Asegúrate de haber ejecutado el script SQL en Supabase.')
+      if (err.name === 'AbortError') {
+        setError('La solicitud tardó demasiado. Verifica tu conexión e intenta de nuevo.')
+      } else {
+        setError(err.message || 'Error al guardar el producto.')
+      }
     } finally {
       setLoading(false)
     }
@@ -366,7 +379,16 @@ export default function NuevoProductoPage() {
                   {/* Selection Action Button */}
                   <button
                     type="button"
-                    onClick={() => setImageModalOpen(true)}
+                    onClick={() => {
+                      setImageModalOpen(true)
+                      if (availableImages.length === 0) {
+                        setImagesLoading(true)
+                        fetch('/api/dashboard/product-images')
+                          .then((r) => r.json())
+                          .then(({ images }) => setAvailableImages(images || []))
+                          .finally(() => setImagesLoading(false))
+                      }
+                    }}
                     disabled={loading || success}
                     className="w-full py-3.5 bg-black/60 hover:bg-black/90 border border-white/10 hover:border-primary/50 text-white/80 hover:text-white rounded-xl text-xs font-condensed tracking-[0.2em] font-bold uppercase transition-all duration-300 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(197,160,89,0.15)] mt-auto"
                   >
@@ -428,8 +450,13 @@ export default function NuevoProductoPage() {
             
             {/* Modal Content - Scrollable Grid */}
             <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
+              {imagesLoading && (
+                <div className="flex items-center justify-center py-16">
+                  <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+                </div>
+              )}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {AVAILABLE_IMAGES.map((imgName) => {
+                {availableImages.map((imgName) => {
                   const fullUrl = `/images/productos/${imgName}`
                   const isSelected = imageUrl === fullUrl
                   
@@ -476,7 +503,7 @@ export default function NuevoProductoPage() {
             
             {/* Modal Footer */}
             <div className="p-4 bg-black/20 border-t border-white/5 flex justify-between items-center text-xs text-white/30">
-              <span>Total: {AVAILABLE_IMAGES.length} imágenes cargadas</span>
+              <span>Total: {availableImages.length} imágenes cargadas</span>
               <span className="italic font-condensed tracking-wider">DELIRIO GIN PREMIUM</span>
             </div>
           </div>
@@ -486,34 +513,3 @@ export default function NuevoProductoPage() {
   )
 }
 
-const AVAILABLE_IMAGES = [
-  'generated-1778549037715.png',
-  'generated-1778549044108.png',
-  'generated-1778549057001.png',
-  'generated-1778549058690.png',
-  'generated-1778549072341.png',
-  'generated-1778549075774.png',
-  'generated-1778549076048.png',
-  'generated-1778549078456.png',
-  'generated-1778549080715.png',
-  'generated-1778549788271.png',
-  'generated-1778549807847.png',
-  'generated-1778549983688.png',
-  'generated-1778549987054.png',
-  'generated-1778549998390.png',
-  'generated-1778550000337.png',
-  'generated-1778550030318.png',
-  'generated-1778550047649.png',
-  'generated-1778550051255.png',
-  'generated-1778550054491.png',
-  'generated-1778550851893.png',
-  'generated-1778551165166.png',
-  'generated-1778551167623.png',
-  'generated-1778551171506.png',
-  'generated-1778553602903.png',
-  'generated-1778553603231.png',
-  'generated-1778553614556.png',
-  'generated-1778553615583.png',
-  'generated-1778553922322.png',
-  'generated-1778553922926.png'
-]

@@ -19,6 +19,7 @@ export function Collection() {
       .from('products')
       .select('*')
       .order('created_at', { ascending: true })
+      .limit(6)
       .then(({ data }) => {
         setProducts(data || [])
         setLoading(false)

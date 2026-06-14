@@ -39,12 +39,20 @@ export default function ProductosPage() {
     if (!confirm('¿Estás seguro de que deseas eliminar este producto permanentemente?')) return
     setDeletingId(id)
     try {
-      const { error: dbError } = await supabase
-        .from('products')
-        .delete()
-        .eq('id', id)
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      if (!token) throw new Error('No hay sesión activa')
 
-      if (dbError) throw dbError
+      const res = await fetch(`/api/dashboard/products/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+      })
+
+      if (!res.ok) {
+        const { error } = await res.json()
+        throw new Error(error || 'Error al eliminar')
+      }
+
       setProducts(products.filter(p => p.id !== id))
     } catch (err: any) {
       alert(err.message || 'Error al eliminar el producto.')
