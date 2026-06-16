@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Tag, RefreshCw, AlertTriangle, Trash2, Edit } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
 
 export default function ProductosPage() {
   const [products, setProducts] = useState<any[]>([])
@@ -16,16 +15,15 @@ export default function ProductosPage() {
     setLoading(true)
     setError(null)
     try {
-      const { data, error: dbError } = await supabase
-        .from('products')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-      if (dbError) throw dbError
+      const res = await fetch('/api/dashboard/products')
+      if (!res.ok) {
+        const json = await res.json()
+        throw new Error(json.error || 'Error al cargar productos')
+      }
+      const { data } = await res.json()
       setProducts(data || [])
     } catch (err: any) {
-      console.error('Error fetching products:', err)
-      setError('No se pudo conectar a la base de datos de productos. Verifica tus políticas RLS y conexión.')
+      setError(err.message || 'No se pudo cargar el catálogo de productos.')
     } finally {
       setLoading(false)
     }
@@ -39,13 +37,8 @@ export default function ProductosPage() {
     if (!confirm('¿Estás seguro de que deseas eliminar este producto permanentemente?')) return
     setDeletingId(id)
     try {
-      const { data: { session } } = await supabase.auth.getSession()
-      const token = session?.access_token
-      if (!token) throw new Error('No hay sesión activa')
-
       const res = await fetch(`/api/dashboard/products/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` },
       })
 
       if (!res.ok) {

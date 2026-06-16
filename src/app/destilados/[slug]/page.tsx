@@ -9,7 +9,6 @@ import { Minus, Plus, ShoppingBag, ArrowLeft, ChevronRight } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Orbs } from '@/components/Orbs'
-import { supabase } from '@/lib/supabase'
 import type { Product } from '@/lib/constants'
 import { formatPrice } from '@/lib/utils'
 import { useCartStore } from '@/store/cart'
@@ -24,24 +23,19 @@ export default function ProductPage() {
 
   useEffect(() => {
     if (!slug) return
-    supabase
-      .from('products')
-      .select('*')
-      .eq('slug', slug)
-      .single()
+    fetch(`/api/products?slug=${encodeURIComponent(slug)}`)
+      .then((r) => r.json())
       .then(({ data }) => {
         setProduct(data || null)
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [slug])
 
   useEffect(() => {
     if (!product) return
-    supabase
-      .from('products')
-      .select('id, slug, name, abv, price, image_url')
-      .neq('id', product.id)
-      .limit(3)
+    fetch(`/api/products?exclude=${product.id}&limit=3&fields=id,slug,name,abv,price,image_url`)
+      .then((r) => r.json())
       .then(({ data }) => setRelated(data || []))
   }, [product])
 
@@ -49,7 +43,7 @@ export default function ProductPage() {
     return (
       <div className="flex flex-col min-h-screen bg-background">
         <Orbs />
-        <Navbar />
+        <Navbar staticLogo />
         <div className="flex-1 flex items-center justify-center">
           <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
         </div>
@@ -77,7 +71,7 @@ export default function ProductPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="flex-1 pt-32 pb-32">
 

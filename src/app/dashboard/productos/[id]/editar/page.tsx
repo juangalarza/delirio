@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft, Save, AlertTriangle, CheckCircle2, Image as ImageIcon } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
 
 export default function EditarProductoPage() {
   const router = useRouter()
@@ -32,13 +31,10 @@ export default function EditarProductoPage() {
 
   useEffect(() => {
     if (!id) return
-    supabase
-      .from('products')
-      .select('*')
-      .eq('id', id)
-      .single()
-      .then(({ data, error: dbErr }) => {
-        if (dbErr || !data) {
+    fetch(`/api/dashboard/products/${id}`)
+      .then((r) => r.json())
+      .then(({ data, error: apiErr }) => {
+        if (apiErr || !data) {
           setLoadError('Producto no encontrado.')
         } else {
           setName(data.name || '')
@@ -52,6 +48,10 @@ export default function EditarProductoPage() {
           setImageUrl(data.image_url || '')
           setIsExclusive(data.is_exclusive || false)
         }
+        setLoadingData(false)
+      })
+      .catch(() => {
+        setLoadError('No se pudo cargar el producto.')
         setLoadingData(false)
       })
   }, [id])

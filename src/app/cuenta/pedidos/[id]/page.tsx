@@ -67,7 +67,7 @@ export default function OrderDetailPage() {
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen bg-background">
-        <Orbs /><Navbar />
+        <Orbs /><Navbar staticLogo />
         <main className="flex-1 flex items-center justify-center">
           <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </main>
@@ -79,7 +79,7 @@ export default function OrderDetailPage() {
   if (notFound || !order) {
     return (
       <div className="flex flex-col min-h-screen bg-background">
-        <Orbs /><Navbar />
+        <Orbs /><Navbar staticLogo />
         <main className="flex-1 pt-32 pb-24 px-6 flex items-center justify-center">
           <div className="text-center">
             <p className="text-foreground/40 font-sans text-sm mb-4">Pedido no encontrado.</p>
@@ -101,7 +101,7 @@ export default function OrderDetailPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="flex-1 pt-32 pb-24 px-6">
         <div className="max-w-2xl mx-auto">

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ export default function CarritoPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="flex-1 pt-36 pb-32 px-6 md:px-24">
         <div className="max-w-5xl mx-auto">

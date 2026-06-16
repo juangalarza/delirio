@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Suspense, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -80,7 +80,7 @@ export default function SuccessPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
       <Suspense fallback={<div className="flex-1" />}>
         <SuccessContent />
       </Suspense>

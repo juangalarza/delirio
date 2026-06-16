@@ -15,6 +15,21 @@ function createServiceClient() {
   )
 }
 
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    const db = createServiceClient()
+    const { data, error } = await db.from('products').select('*').eq('id', id).single()
+    if (error) return Response.json({ error: error.message }, { status: 500 })
+    return Response.json({ data })
+  } catch (err: any) {
+    return Response.json({ error: err.message || 'Error interno del servidor' }, { status: 500 })
+  }
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

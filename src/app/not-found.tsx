@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Navbar } from '@/components/Navbar'
@@ -15,7 +15,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="flex-1 flex items-center justify-center px-6 py-32">
         <div className="text-center max-w-sm">

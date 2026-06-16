@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -63,7 +63,7 @@ export default function PendingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
       <Suspense fallback={<div className="flex-1" />}>
         <PendingContent />
       </Suspense>

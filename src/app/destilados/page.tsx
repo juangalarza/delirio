@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { Orbs } from "@/components/Orbs"
-import { supabase } from '@/lib/supabase'
 import type { Product } from '@/lib/constants'
 import { formatPrice } from "@/lib/utils"
 import { useCartStore } from "@/store/cart"
@@ -18,20 +17,19 @@ export default function DestiladosPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: true })
+    fetch('/api/products')
+      .then((r) => r.json())
       .then(({ data }) => {
         setProducts(data || [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [])
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="pt-40 pb-32 px-8 md:px-24">
         <div className="max-w-7xl mx-auto">

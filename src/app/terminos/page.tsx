@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Orbs } from '@/components/Orbs'
@@ -23,7 +23,7 @@ export default function TerminosPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Orbs />
-      <Navbar />
+      <Navbar staticLogo />
 
       <main className="flex-1 pt-32 pb-24 px-6">
         <div className="max-w-2xl mx-auto">

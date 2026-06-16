@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
 import type { Product } from '@/lib/constants'
 import { formatPrice } from '@/lib/utils'
 import { useCartStore } from '@/store/cart'
@@ -15,15 +14,13 @@ export function Collection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: true })
-      .limit(6)
+    fetch('/api/products?limit=6')
+      .then((r) => r.json())
       .then(({ data }) => {
         setProducts(data || [])
         setLoading(false)
       })
+      .catch(() => setLoading(false))
   }, [])
 
   if (loading) {
