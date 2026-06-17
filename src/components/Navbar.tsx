@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCartStore } from '@/store/cart'
 
 export function Navbar({ staticLogo = false }: { staticLogo?: boolean }) {
@@ -33,17 +34,25 @@ export function Navbar({ staticLogo = false }: { staticLogo?: boolean }) {
       <Link href="/" className="flex items-center mt-2">
         <div className="relative h-[60px] w-[180px] overflow-hidden">
           {!staticLogo && (
-            <img
+            <Image
               src="/images/logo-nav-white.png"
               alt="Delirio Destilería"
+              width={180}
+              height={60}
+              sizes="180px"
+              priority
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-auto max-w-none transition-opacity duration-500 ${
                 scrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
               }`}
             />
           )}
-          <img
+          <Image
             src="/images/logo-nav.png"
             alt="Delirio Destilería"
+            width={180}
+            height={60}
+            sizes="180px"
+            priority
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-auto max-w-none transition-opacity duration-500 ${
               staticLogo ? 'opacity-100' : scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}

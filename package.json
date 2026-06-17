@@ -21,6 +21,19 @@
     "tailwind-merge": "^3.6.0",
     "zustand": "^5.0.14"
   },
+  "browserslist": {
+    "production": [
+      "chrome >= 94",
+      "edge >= 94",
+      "firefox >= 93",
+      "safari >= 16"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
