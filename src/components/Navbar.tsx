@@ -52,11 +52,11 @@ export function Navbar({ staticLogo = false }: { staticLogo?: boolean }) {
       </Link>
 
       <div className="hidden md:flex items-center gap-10">
-        {['HERENCIA', 'DESTILADOS', 'CONTACTO'].map((item) => (
+        {['Herencia', 'Destilados', 'Contacto'].map((item) => (
           <Link
             key={item}
             href={`/#${item.toLowerCase() === 'destilados' ? 'colección' : item.toLowerCase()}`}
-            className={`text-[16px] tracking-[0.2em] transition-colors duration-300 font-condensed ${
+            className={`text-[16px] tracking-[0.2em] transition-colors duration-300 font-condensed uppercase ${
               isLight
                 ? 'text-foreground hover:text-primary'
                 : 'text-white/90 hover:text-white'
@@ -75,7 +75,7 @@ export function Navbar({ staticLogo = false }: { staticLogo?: boolean }) {
           }`}
         >
           <ShoppingBag className="w-4 h-4" />
-          <span className="text-[16px] tracking-widest font-bold">CARRITO</span>
+          <span className="text-[16px] tracking-widest font-bold uppercase">Carrito</span>
           {mounted && totalCount() > 0 && (
             <span className="absolute -top-2 -right-2 w-5 h-5 bg-primary text-black text-[10px] font-bold rounded-full flex items-center justify-center font-condensed">
               {totalCount() > 9 ? '9+' : totalCount()}

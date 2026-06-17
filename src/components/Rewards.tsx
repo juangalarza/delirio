@@ -4,121 +4,76 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Trophy } from 'lucide-react'
 
-const row1 = [
-  {
-    image: '/images/premios/00.png',
-    title: 'IWSC DOUBLE GOLD',
-    category: '98 Points - Best In Class',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/01.png',
-    title: 'GLOBAL GIN MASTERS',
-    category: 'Master Medal Winner',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/02.png',
-    title: 'SAN FRANCISCO SPIRITS',
-    category: 'Double Gold Medalist',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/03.png',
-    title: 'LONDON SPIRITS',
-    category: 'Gold Medal - 96 Points',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/04.png',
-    title: 'BERLIN INTERNATIONAL',
-    category: 'Best Craft Gin Argentina',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/05.png',
-    title: 'MICROLIQUOR AWARDS',
-    category: 'Triple Gold Medal',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/06.png',
-    title: 'BARTENDER SPIRITS',
-    category: '95 Points - Double Gold',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/07.png',
-    title: 'SIP AWARDS USA',
-    category: 'Platinum Medal Winner',
-    year: '2025'
-  }
+type Reward = {
+  image: string
+  title: string
+  category: string
+  year: string
+  alt: string
+}
+
+const row1: Reward[] = [
+  { image: '/images/premios/00.png', title: 'IWSC Double Gold',     category: '98 puntos — Best in Class',    year: '2025', alt: 'Medalla IWSC Double Gold 2025 — 98 puntos, Best in Class' },
+  { image: '/images/premios/01.png', title: 'Global Gin Masters',   category: 'Master Medal Winner',          year: '2026', alt: 'Medalla Global Gin Masters 2026 — Master Medal Winner' },
+  { image: '/images/premios/02.png', title: 'San Francisco Spirits',category: 'Double Gold Medalist',         year: '2025', alt: 'Medalla San Francisco World Spirits Competition 2025 — Double Gold' },
+  { image: '/images/premios/03.png', title: 'London Spirits',       category: 'Gold Medal — 96 puntos',      year: '2026', alt: 'Medalla London Spirits Competition 2026 — Gold Medal, 96 puntos' },
+  { image: '/images/premios/04.png', title: 'Berlin International', category: 'Best Craft Gin Argentina',    year: '2025', alt: 'Medalla Berlin International Spirits 2025 — Best Craft Gin Argentina' },
+  { image: '/images/premios/05.png', title: 'Microliquor Awards',   category: 'Triple Gold Medal',           year: '2025', alt: 'Medalla Microliquor Awards 2025 — Triple Gold Medal' },
+  { image: '/images/premios/06.png', title: 'Bartender Spirits',    category: '95 puntos — Double Gold',     year: '2026', alt: 'Medalla Bartender Spirits Awards 2026 — 95 puntos, Double Gold' },
+  { image: '/images/premios/07.png', title: 'SIP Awards USA',       category: 'Platinum Medal Winner',       year: '2025', alt: 'Medalla SIP Awards USA 2025 — Platinum Medal Winner' },
 ]
 
-const row2 = [
-  {
-    image: '/images/premios/09.png',
-    title: 'INT\'L SPIRITS CHALLENGE',
-    category: 'Gold Medal Winner',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/10.png',
-    title: 'ASCOT AWARDS USA',
-    category: 'Double Gold Medal',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/11.png',
-    title: 'USA SPIRITS RATINGS',
-    category: 'Gold Medal - 94 Points',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/12.png',
-    title: 'CRAFT DISTILLERS',
-    category: 'Best in Category Gold',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/13.png',
-    title: 'ARGENTINA W&S AWARDS',
-    category: 'Best National Craft Gin',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/14.png',
-    title: 'WORLD GIN RATINGS',
-    category: 'Super Premium Rating',
-    year: '2025'
-  },
-  {
-    image: '/images/premios/15.png',
-    title: 'SAN JUAN DISTILLERS',
-    category: 'Local Product Excellence',
-    year: '2026'
-  },
-  {
-    image: '/images/premios/00.png',
-    title: 'CATHAY PACIFIC IWSC',
-    category: 'Gold Medal - 95 Points',
-    year: '2025'
-  }
+const row2: Reward[] = [
+  { image: '/images/premios/09.png', title: "Int'l Spirits Challenge", category: 'Gold Medal Winner',         year: '2026', alt: 'Medalla International Spirits Challenge 2026 — Gold Medal Winner' },
+  { image: '/images/premios/10.png', title: 'Ascot Awards USA',        category: 'Double Gold Medal',         year: '2025', alt: 'Medalla Ascot Awards USA 2025 — Double Gold Medal' },
+  { image: '/images/premios/11.png', title: 'USA Spirits Ratings',     category: 'Gold Medal — 94 puntos',   year: '2026', alt: 'Medalla USA Spirits Ratings 2026 — Gold Medal, 94 puntos' },
+  { image: '/images/premios/12.png', title: 'Craft Distillers',        category: 'Best in Category Gold',    year: '2025', alt: 'Medalla Craft Distillers Award 2025 — Best in Category Gold' },
+  { image: '/images/premios/13.png', title: 'Argentina W&S Awards',    category: 'Best National Craft Gin',  year: '2026', alt: 'Medalla Argentina Wine & Spirits Awards 2026 — Best National Craft Gin' },
+  { image: '/images/premios/14.png', title: 'World Gin Ratings',       category: 'Super Premium Rating',     year: '2025', alt: 'Medalla World Gin Ratings 2025 — Super Premium Rating' },
+  { image: '/images/premios/15.png', title: 'San Juan Distillers',     category: 'Local Product Excellence', year: '2026', alt: 'Medalla San Juan Distillers Award 2026 — Local Product Excellence' },
+  { image: '/images/premios/00.png', title: 'Cathay Pacific IWSC',     category: 'Gold Medal — 95 puntos',   year: '2025', alt: 'Medalla Cathay Pacific IWSC 2025 — Gold Medal, 95 puntos' },
 ]
+
+function RewardCard({ reward, isDuplicate }: { reward: Reward; isDuplicate: boolean }) {
+  return (
+    <div
+      aria-hidden={isDuplicate ? true : undefined}
+      className="group relative bg-white border border-black/[0.08] hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 transition-all duration-300 shadow-sm overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.04)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
+        <Image
+          src={reward.image}
+          alt={isDuplicate ? '' : reward.alt}
+          width={65}
+          height={65}
+          loading="lazy"
+          className="object-contain group-hover:scale-105 transition-all duration-500 drop-shadow-[0_5px_10px_rgba(0,0,0,0.15)]"
+        />
+      </div>
+      <h3 className="text-[10px] font-serif font-bold text-foreground group-hover:text-primary tracking-wide transition-colors duration-300 mt-3 truncate max-w-full uppercase">
+        {reward.title}
+      </h3>
+      <p className="text-[8px] font-sans text-foreground/40 mt-0.5 truncate max-w-full font-medium leading-snug">
+        {reward.category}
+      </p>
+      <span className="text-[7px] font-mono text-primary/40 group-hover:text-primary/70 mt-2 font-bold tracking-widest uppercase transition-colors duration-300">
+        {reward.year} Competition
+      </span>
+    </div>
+  )
+}
 
 export function Rewards() {
   return (
     <section className="py-24 bg-[#F7F5F0] relative overflow-hidden border-y border-black/5">
-      {/* Subtle top ambient gold glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-      {/* Side Gradient Fades */}
       <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#F7F5F0] via-[#F7F5F0]/80 to-transparent z-20 pointer-events-none" />
       <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#F7F5F0] via-[#F7F5F0]/80 to-transparent z-20 pointer-events-none" />
 
       <div className="w-full flex flex-col items-center">
 
-        {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12 space-y-4 px-4">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -128,7 +83,7 @@ export function Rewards() {
           >
             <Trophy className="w-3.5 h-3.5 text-primary" />
             <span className="text-[10px] tracking-[0.25em] font-condensed font-bold text-primary uppercase">
-              DISTINCIONES Y PREMIOS
+              Distinciones y premios
             </span>
           </motion.div>
 
@@ -153,85 +108,30 @@ export function Rewards() {
           </motion.p>
         </div>
 
-        {/* Dual Marquee Container */}
         <div className="w-full flex flex-col gap-6 mt-6 overflow-hidden relative py-4">
 
-          {/* Row 1 (Moving Left) */}
+          {/* Fila 1 — avanza hacia la izquierda */}
           <div className="w-full overflow-hidden flex relative select-none">
             <motion.div
               className="flex gap-6 shrink-0"
               animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                ease: "linear",
-                duration: 25,
-                repeat: Infinity
-              }}
+              transition={{ ease: "linear", duration: 25, repeat: Infinity }}
             >
               {[...row1, ...row1].map((reward, i) => (
-                <div
-                  key={`r1-${i}`}
-                  className="group relative bg-white border border-black/[0.08] hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.04)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
-                    <Image
-                      src={reward.image}
-                      alt={reward.title}
-                      width={65}
-                      height={65}
-                      className="object-contain group-hover:scale-105 transition-all duration-500 drop-shadow-[0_5px_10px_rgba(0,0,0,0.15)]"
-                    />
-                  </div>
-                  <h3 className="text-[10px] font-serif font-bold text-foreground group-hover:text-primary tracking-wide transition-colors duration-300 mt-3 truncate max-w-full">
-                    {reward.title}
-                  </h3>
-                  <p className="text-[8px] font-sans text-foreground/40 mt-0.5 truncate max-w-full font-medium leading-snug">
-                    {reward.category}
-                  </p>
-                  <span className="text-[7px] font-mono text-primary/40 group-hover:text-primary/70 mt-2 font-bold tracking-widest uppercase transition-colors duration-300">
-                    {reward.year} COMPETITION
-                  </span>
-                </div>
+                <RewardCard key={`r1-${i}`} reward={reward} isDuplicate={i >= row1.length} />
               ))}
             </motion.div>
           </div>
 
-          {/* Row 2 (Moving Right) */}
+          {/* Fila 2 — avanza hacia la derecha */}
           <div className="w-full overflow-hidden flex relative select-none">
             <motion.div
               className="flex gap-6 shrink-0"
               animate={{ x: ["-50%", "0%"] }}
-              transition={{
-                ease: "linear",
-                duration: 25,
-                repeat: Infinity
-              }}
+              transition={{ ease: "linear", duration: 25, repeat: Infinity }}
             >
               {[...row2, ...row2].map((reward, i) => (
-                <div
-                  key={`r2-${i}`}
-                  className="group relative bg-white border border-black/[0.08] hover:border-primary/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center w-[180px] h-[190px] shrink-0 hover:bg-white transition-all duration-300 shadow-sm overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.04)_0%,transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
-                    <Image
-                      src={reward.image}
-                      alt={reward.title}
-                      width={65}
-                      height={65}
-                      className="object-contain group-hover:scale-105 transition-all duration-500 drop-shadow-[0_5px_10px_rgba(0,0,0,0.15)]"
-                    />
-                  </div>
-                  <h3 className="text-[10px] font-serif font-bold text-foreground group-hover:text-primary tracking-wide transition-colors duration-300 mt-3 truncate max-w-full">
-                    {reward.title}
-                  </h3>
-                  <p className="text-[8px] font-sans text-foreground/40 mt-0.5 truncate max-w-full font-medium leading-snug">
-                    {reward.category}
-                  </p>
-                  <span className="text-[7px] font-mono text-primary/40 group-hover:text-primary/70 mt-2 font-bold tracking-widest uppercase transition-colors duration-300">
-                    {reward.year} COMPETITION
-                  </span>
-                </div>
+                <RewardCard key={`r2-${i}`} reward={reward} isDuplicate={i >= row2.length} />
               ))}
             </motion.div>
           </div>

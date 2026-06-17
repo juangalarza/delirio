@@ -6,26 +6,26 @@ import Image from 'next/image'
 export function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
       <Image
         src="/images/hero-delirio.jpg"
-        alt="Delirio Hero"
+        alt="Vista de la destilería Delirio entre los cerros de Zonda, San Juan, Argentina"
         fill
         className="object-cover"
         priority
+        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 100vw, 100vw"
+        quality={85}
       />
 
-      {/* Overlay */}
+      {/* Overlay — bg-black/50 = rgba(0,0,0,0.5), cumple WCAG AA contra texto blanco */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-4">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-[12px] tracking-[0.5em] text-primary mb-6 font-condensed"
+          className="text-[12px] tracking-[0.5em] text-primary mb-6 font-condensed uppercase"
         >
-          DESTILERÍA ARTESANAL DE VANGUARDIA
+          Destilería artesanal de vanguardia
         </motion.span>
 
         <motion.h1
@@ -34,7 +34,7 @@ export function Hero() {
           transition={{ delay: 0.2 }}
           className="text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6"
         >
-          ESENCIA
+          Esencia
         </motion.h1>
 
         <motion.p
@@ -50,12 +50,11 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className="px-10 py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all"
+          className="px-10 py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all uppercase"
         >
-          EXPLORAR
+          Explorar
         </motion.button>
       </div>
-
     </section>
   )
 }

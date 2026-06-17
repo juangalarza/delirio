@@ -25,7 +25,7 @@ export function Contact() {
       setEmail('')
       setSubject('')
       setMessage('')
-    } catch (err) {
+    } catch {
       setError('Ocurrió un error al enviar el mensaje. Por favor intenta de nuevo.')
     } finally {
       setSubmitting(false)
@@ -34,14 +34,13 @@ export function Contact() {
 
   return (
     <section id="contacto-seccion" className="py-28 bg-white relative overflow-hidden border-t border-black/5">
-      {/* Golden accent ambient */}
       <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/3 rounded-full blur-[90px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          {/* Left Column: Contact Details */}
+          {/* Columna izquierda: datos de contacto */}
           <div className="space-y-8 lg:pr-8">
             <div className="space-y-4">
               <motion.div
@@ -52,7 +51,7 @@ export function Contact() {
               >
                 <MessageSquare className="w-3.5 h-3.5 text-primary" />
                 <span className="text-[9px] tracking-[0.3em] font-condensed font-bold text-primary uppercase">
-                  CONECTA CON NOSOTROS
+                  Conecta con nosotros
                 </span>
               </motion.div>
 
@@ -77,7 +76,6 @@ export function Contact() {
               </motion.p>
             </div>
 
-            {/* Info Cards */}
             <div className="space-y-6 pt-4">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -134,7 +132,7 @@ export function Contact() {
                   <a
                     href="https://wa.me/542644567890"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="text-xs md:text-sm text-foreground/80 hover:text-primary transition-colors font-mono leading-relaxed block"
                   >
                     +54 264 456-7890
@@ -144,7 +142,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
+          {/* Columna derecha: formulario */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -152,7 +150,6 @@ export function Contact() {
             viewport={{ once: true }}
             className="w-full bg-white border border-black/[0.10] rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.07)]"
           >
-            {/* Top gold line */}
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
             <AnimatePresence mode="wait">
@@ -170,10 +167,9 @@ export function Contact() {
                     </div>
                   )}
 
-                  {/* Name field */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-name" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block">
-                      NOMBRE COMPLETO
+                    <label htmlFor="contact-name" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block uppercase">
+                      Nombre completo
                     </label>
                     <div className="relative group">
                       <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-foreground/25 group-focus-within:text-primary transition-colors">
@@ -192,10 +188,9 @@ export function Contact() {
                     </div>
                   </div>
 
-                  {/* Email field */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-email" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block">
-                      CORREO ELECTRÓNICO
+                    <label htmlFor="contact-email" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block uppercase">
+                      Correo electrónico
                     </label>
                     <div className="relative group">
                       <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-foreground/25 group-focus-within:text-primary transition-colors">
@@ -214,10 +209,9 @@ export function Contact() {
                     </div>
                   </div>
 
-                  {/* Subject field */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-subject" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block">
-                      ASUNTO
+                    <label htmlFor="contact-subject" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block uppercase">
+                      Asunto
                     </label>
                     <div className="relative group">
                       <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-foreground/25 group-focus-within:text-primary transition-colors">
@@ -236,10 +230,9 @@ export function Contact() {
                     </div>
                   </div>
 
-                  {/* Message field */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-message" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block">
-                      MENSAJE
+                    <label htmlFor="contact-message" className="text-[10px] tracking-[0.2em] font-condensed text-foreground/50 block uppercase">
+                      Mensaje
                     </label>
                     <textarea
                       id="contact-message"
@@ -253,7 +246,6 @@ export function Contact() {
                     />
                   </div>
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={submitting}
@@ -263,7 +255,7 @@ export function Contact() {
                       <div className="w-4 h-4 rounded-full border-2 border-black border-t-transparent animate-spin" />
                     ) : (
                       <>
-                        ENVIAR MENSAJE
+                        Enviar mensaje
                         <Send className="w-3.5 h-3.5" />
                       </>
                     )}
@@ -282,7 +274,7 @@ export function Contact() {
                   </div>
 
                   <h3 className="text-xl font-serif font-bold text-foreground tracking-wide">
-                    ¡Mensaje Enviado con Éxito!
+                    ¡Mensaje enviado con éxito!
                   </h3>
 
                   <p className="text-xs text-foreground/50 leading-relaxed font-sans max-w-xs">
@@ -294,7 +286,7 @@ export function Contact() {
                     onClick={() => setSuccess(false)}
                     className="px-6 py-2.5 border border-black/10 hover:border-primary/30 text-foreground/60 hover:text-primary rounded-sm text-[10px] tracking-widest font-condensed font-bold uppercase transition-all duration-300 mt-4 cursor-pointer"
                   >
-                    ENVIAR OTRO MENSAJE
+                    Enviar otro mensaje
                   </button>
                 </motion.div>
               )}

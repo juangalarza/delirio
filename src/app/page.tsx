@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     description: 'Destilados artesanales con carácter propio. Descubrí la experiencia Delirio.',
     type: 'website',
     locale: 'es_AR',
+    images: [
+      {
+        url: '/images/hero-delirio.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Delirio Destilería — Gin Premium Argentino',
+      },
+    ],
   },
 }
 

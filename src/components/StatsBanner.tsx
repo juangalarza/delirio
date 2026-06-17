@@ -30,10 +30,10 @@ function Counter({ value, suffix = "" }: { value: number, suffix?: string }) {
 }
 
 const stats = [
-  { label: 'BOTÁNICOS', value: 12, suffix: '+' }, // TODO: confirmar valor con cliente
-  { label: 'DESTILADOS', value: 7, suffix: '' },
-  { label: 'ARTESANAL', value: 100, suffix: '%' },
-  { label: 'PREMIOS INTERNACIONALES', value: 15, suffix: '' },
+  { label: 'Botánicos', value: 12, suffix: '+' },
+  { label: 'Destilados', value: 7, suffix: '' },
+  { label: 'Artesanal', value: 100, suffix: '%' },
+  { label: 'Premios internacionales', value: 15, suffix: '' },
 ]
 
 export function StatsBanner() {
@@ -44,12 +44,12 @@ export function StatsBanner() {
         whileInView={{ opacity: 1, y: 0 }}
         className="w-full max-w-7xl h-auto md:h-[160px] py-10 md:py-0 rounded-2xl bg-[#F5F2EC] border border-black/10 flex flex-col md:flex-row items-center justify-around px-8 md:px-16 gap-8 md:gap-4"
       >
-        {stats.map((stat, i) => (
+        {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center text-center">
             <span className="text-4xl md:text-6xl font-serif text-foreground font-bold">
               <Counter value={stat.value} suffix={stat.suffix} />
             </span>
-            <span className="text-[16px] tracking-widest text-primary font-condensed mt-2">
+            <span className="text-[16px] tracking-widest text-primary font-condensed mt-2 uppercase">
               {stat.label}
             </span>
           </div>
