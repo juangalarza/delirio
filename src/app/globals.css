@@ -74,3 +74,50 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.10);
 }
+
+/* Orbs — CSS puro (compositor thread, sin main-thread JS) */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(50px, -30px); }
+}
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-40px, 60px); }
+}
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(30px, 40px); }
+}
+
+.orb-1, .orb-2, .orb-3 {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, #c5a059 0%, transparent 70%);
+  opacity: 0.07;
+  filter: blur(120px);
+  top: 10%; right: -10%;
+  animation: orb-float-1 20s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 1000px; height: 1000px;
+  background: radial-gradient(circle, #4a5d4e 0%, transparent 70%);
+  opacity: 0.05;
+  filter: blur(150px);
+  top: 40%; left: -20%;
+  animation: orb-float-2 25s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, #d48c5b 0%, transparent 70%);
+  opacity: 0.04;
+  filter: blur(120px);
+  top: 70%; right: -5%;
+  animation: orb-float-3 15s ease-in-out infinite;
+}

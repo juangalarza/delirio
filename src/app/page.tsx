@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { StatsBanner } from "@/components/StatsBanner";
-import { Manifesto } from "@/components/Manifesto";
-import { Collection } from "@/components/Collection";
-import { B2B } from "@/components/B2B";
-import { Rewards } from "@/components/Rewards";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
 import { Orbs } from "@/components/Orbs";
+
+const StatsBanner = dynamic(() => import('@/components/StatsBanner').then(m => ({ default: m.StatsBanner })))
+const Manifesto   = dynamic(() => import('@/components/Manifesto').then(m => ({ default: m.Manifesto })))
+const Collection  = dynamic(() => import('@/components/Collection').then(m => ({ default: m.Collection })))
+const B2B         = dynamic(() => import('@/components/B2B').then(m => ({ default: m.B2B })))
+const Rewards     = dynamic(() => import('@/components/Rewards').then(m => ({ default: m.Rewards })))
+const Contact     = dynamic(() => import('@/components/Contact').then(m => ({ default: m.Contact })))
+const Footer      = dynamic(() => import('@/components/Footer').then(m => ({ default: m.Footer })))
 
 export const metadata: Metadata = {
   title: 'Delirio Destilería | Gin Premium Argentino',
@@ -38,7 +40,7 @@ export default function Home() {
       <main>
         <Hero />
         <StatsBanner />
-<Manifesto />
+        <Manifesto />
         <Collection />
         <B2B />
         <Rewards />
