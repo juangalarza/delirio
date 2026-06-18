@@ -33,15 +33,15 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto-seccion" className="py-28 bg-white relative overflow-hidden border-t border-black/5">
+    <section id="contacto-seccion" className="py-16 md:py-28 bg-white relative overflow-hidden border-t border-black/5">
       <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/3 rounded-full blur-[90px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
 
           {/* Columna izquierda: datos de contacto */}
-          <div className="space-y-8 lg:pr-8">
+          <div className="space-y-6 md:space-y-8 lg:pr-8">
             <div className="space-y-4">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}

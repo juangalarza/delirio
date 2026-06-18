@@ -16,16 +16,16 @@ const LEGAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer id="contacto" className="py-24 px-8 md:px-24 bg-[#222120] flex flex-col items-center gap-10">
+    <footer id="contacto" className="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-[#222120] flex flex-col items-center gap-8 md:gap-10">
       <Image
         src="/images/logo.png"
         alt="Delirio Destilería"
-        width={240}
-        height={80}
-        className="object-contain brightness-0 invert opacity-80"
+        width={200}
+        height={67}
+        className="object-contain brightness-0 invert opacity-80 w-[160px] md:w-[200px] lg:w-[240px] h-auto"
       />
 
-      <div className="flex gap-10">
+      <div className="flex gap-8 md:gap-10">
         {SOCIAL_LINKS.map(({ label, href }) => (
           <Link
             key={label}
@@ -39,7 +39,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6">
         {LEGAL_LINKS.map(({ label, href }) => (
           <Link
             key={href}
@@ -51,7 +51,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="flex flex-col items-center gap-4 text-center mt-4">
+      <div className="flex flex-col items-center gap-4 text-center mt-2 md:mt-4">
         <p className="text-[10px] tracking-widest text-white/30 uppercase">
           Beber con moderación. Prohibida su venta a menores de 18 años.
         </p>

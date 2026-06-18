@@ -21,15 +21,15 @@ export function Hero() {
           Destilería artesanal de vanguardia
         </span>
 
-        <h1 className="hero-anim-2 text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6">
+        <h1 className="hero-anim-2 text-5xl sm:text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6">
           Esencia
         </h1>
 
-        <p className="hero-anim-3 text-lg md:text-xl text-white/90 max-w-[700px] leading-relaxed mb-10 italic font-serif">
+        <p className="hero-anim-3 text-base md:text-lg lg:text-xl text-white/90 max-w-[90vw] md:max-w-[700px] leading-relaxed mb-8 md:mb-10 italic font-serif px-2 md:px-0">
           Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia que brindan experiencias únicas.
         </p>
 
-        <button className="hero-anim-4 px-10 py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all uppercase">
+        <button className="hero-anim-4 px-8 md:px-10 py-4 md:py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all uppercase text-sm md:text-base">
           Explorar
         </button>
       </div>

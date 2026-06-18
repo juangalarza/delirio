@@ -25,101 +25,97 @@ export function Collection() {
 
   if (loading) {
     return (
-      <section id="colección" className="min-h-[calc(100vh-80px)] pt-24 pb-12 px-4 md:px-24">
-        <div className="px-8 md:px-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="h-[600px] rounded-lg bg-foreground/5 animate-pulse" />
-            ))}
-          </div>
+      <section id="colección" className="min-h-[calc(100vh-80px)] pt-16 md:pt-24 pb-12 px-4 md:px-16 lg:px-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="h-[480px] md:h-[600px] rounded-lg bg-foreground/5 animate-pulse" />
+          ))}
         </div>
       </section>
     )
   }
 
   return (
-    <section id="colección" className="min-h-[calc(100vh-80px)] pt-24 pb-12 px-4 md:px-24">
-      <div className="px-8 md:px-24">
-        <motion.h2
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          className="text-3xl md:text-4xl font-serif text-foreground mb-6 tracking-widest uppercase"
-        >
-          Los destilados
-        </motion.h2>
+    <section id="colección" className="min-h-[calc(100vh-80px)] pt-16 md:pt-24 pb-12 px-4 md:px-16 lg:px-24">
+      <motion.h2
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground mb-6 tracking-widest uppercase"
+      >
+        Los destilados
+      </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {products.map((product, i) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Link
-                href={`/destilados/${product.slug}`}
-                className="group relative h-[600px] rounded-lg overflow-hidden glass p-8 flex flex-col justify-end block"
-              >
-                <Image
-                  src={product.image_url}
-                  alt={product.name}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  quality={70}
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-2xl font-serif text-white">{product.name}</h3>
-                    {product.abv && (
-                      <span className="text-[9px] tracking-widest text-primary border border-primary/40 px-2 py-0.5 rounded-sm font-condensed font-bold shrink-0 uppercase">
-                        {product.abv} vol
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm font-sans text-white/60 mb-6 line-clamp-2">{product.description}</p>
-                  <div className="flex items-center justify-between border-t border-white/10 pt-6 gap-3">
-                    <span className="text-[24px] text-primary font-condensed shrink-0">{formatPrice(product.price)}</span>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault()
-                        addItem({
-                          id: product.id,
-                          slug: product.slug,
-                          name: product.name,
-                          price: product.price,
-                          image: product.image_url,
-                          abv: product.abv || '',
-                        })
-                        openCart()
-                      }}
-                      className="text-[11px] tracking-widest text-black bg-primary hover:bg-white hover:text-black px-4 py-2 rounded-sm font-condensed font-bold transition-colors uppercase"
-                    >
-                      Agregar
-                    </button>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="flex justify-center mt-8"
-        >
-          <Link
-            href="/destilados"
-            className="px-12 py-4 border border-black/20 text-foreground/70 text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm uppercase"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {products.map((product, i) => (
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
           >
-            Ver todos
-          </Link>
-        </motion.div>
+            <Link
+              href={`/destilados/${product.slug}`}
+              className="group relative h-[480px] md:h-[600px] rounded-lg overflow-hidden glass p-6 md:p-8 flex flex-col justify-end block"
+            >
+              <Image
+                src={product.image_url}
+                alt={product.name}
+                fill
+                loading="lazy"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                quality={70}
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-xl md:text-2xl font-serif text-white">{product.name}</h3>
+                  {product.abv && (
+                    <span className="text-[9px] tracking-widest text-primary border border-primary/40 px-2 py-0.5 rounded-sm font-condensed font-bold shrink-0 uppercase">
+                      {product.abv} vol
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm font-sans text-white/60 mb-4 md:mb-6 line-clamp-2">{product.description}</p>
+                <div className="flex items-center justify-between border-t border-white/10 pt-4 md:pt-6 gap-3">
+                  <span className="text-[20px] md:text-[24px] text-primary font-condensed shrink-0">{formatPrice(product.price)}</span>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      addItem({
+                        id: product.id,
+                        slug: product.slug,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image_url,
+                        abv: product.abv || '',
+                      })
+                      openCart()
+                    }}
+                    className="text-[11px] tracking-widest text-black bg-primary hover:bg-white hover:text-black px-4 py-2 rounded-sm font-condensed font-bold transition-colors uppercase"
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        className="flex justify-center mt-8"
+      >
+        <Link
+          href="/destilados"
+          className="px-10 md:px-12 py-4 border border-black/20 text-foreground/70 text-[14px] md:text-[16px] tracking-[0.3em] font-condensed hover:border-primary hover:text-primary transition-all rounded-sm uppercase"
+        >
+          Ver todos
+        </Link>
+      </motion.div>
     </section>
   )
 }

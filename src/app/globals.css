@@ -68,6 +68,15 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
+/* Ocultar scrollbar manteniendo scroll funcional (carrusel de premios) */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* Glassmorphism utility — fondo claro */
 .glass {
   background: rgba(245, 242, 236, 0.85);

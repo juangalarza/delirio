@@ -30,26 +30,26 @@ function Counter({ value, suffix = "" }: { value: number, suffix?: string }) {
 }
 
 const stats = [
-  { label: 'Botánicos', value: 12, suffix: '+' },
-  { label: 'Destilados', value: 7, suffix: '' },
-  { label: 'Artesanal', value: 100, suffix: '%' },
+  { label: 'Botánicos',              value: 12, suffix: '+' },
+  { label: 'Destilados',             value: 7,  suffix: '' },
+  { label: 'Artesanal',              value: 100, suffix: '%' },
   { label: 'Premios internacionales', value: 15, suffix: '' },
 ]
 
 export function StatsBanner() {
   return (
-    <section className="py-20 px-8 md:px-24 flex justify-center">
+    <section className="py-12 md:py-20 px-4 md:px-8 lg:px-24 flex justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        className="w-full max-w-7xl h-auto md:h-[160px] py-10 md:py-0 rounded-2xl bg-[#F5F2EC] border border-black/10 flex flex-col md:flex-row items-center justify-around px-8 md:px-16 gap-8 md:gap-4"
+        className="w-full max-w-7xl rounded-2xl bg-[#F5F2EC] border border-black/10 py-10 md:py-0 md:h-[160px] grid grid-cols-2 md:grid-cols-4 items-center justify-items-center px-6 md:px-16 gap-8 md:gap-4"
       >
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center text-center">
-            <span className="text-4xl md:text-6xl font-serif text-foreground font-bold">
+            <span className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground font-bold">
               <Counter value={stat.value} suffix={stat.suffix} />
             </span>
-            <span className="text-[16px] tracking-widest text-primary font-condensed mt-2 uppercase">
+            <span className="text-[13px] md:text-[16px] tracking-widest text-primary font-condensed mt-2 uppercase leading-tight text-center">
               {stat.label}
             </span>
           </div>
