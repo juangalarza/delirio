@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 export function Hero() {
@@ -20,40 +17,21 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-4">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-[12px] tracking-[0.5em] text-primary mb-6 font-condensed uppercase"
-        >
+        <span className="hero-anim-1 text-[12px] tracking-[0.5em] text-primary mb-6 font-condensed uppercase">
           Destilería artesanal de vanguardia
-        </motion.span>
+        </span>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6"
-        >
+        <h1 className="hero-anim-2 text-6xl md:text-8xl lg:text-[120px] font-serif text-white font-bold uppercase max-w-[1200px] leading-tight mb-6">
           Esencia
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="text-lg md:text-xl text-white/90 max-w-[700px] leading-relaxed mb-10 italic font-serif"
-        >
+        <p className="hero-anim-3 text-lg md:text-xl text-white/90 max-w-[700px] leading-relaxed mb-10 italic font-serif">
           Delirio es una destilería que desafía lo convencional, creando destilados con calidad reconocida mundialmente e identidad propia que brindan experiencias únicas.
-        </motion.p>
+        </p>
 
-        <motion.button
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 }}
-          className="px-10 py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all uppercase"
-        >
+        <button className="hero-anim-4 px-10 py-5 bg-primary text-black font-bold tracking-widest rounded-sm hover:scale-105 transition-all uppercase">
           Explorar
-        </motion.button>
+        </button>
       </div>
     </section>
   )
