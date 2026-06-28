@@ -6,6 +6,7 @@ import { Orbs } from "@/components/Orbs";
 
 const StatsBanner = dynamic(() => import('@/components/StatsBanner').then(m => ({ default: m.StatsBanner })))
 const Manifesto   = dynamic(() => import('@/components/Manifesto').then(m => ({ default: m.Manifesto })))
+const Origen      = dynamic(() => import('@/components/Origen').then(m => ({ default: m.Origen })))
 const Collection  = dynamic(() => import('@/components/Collection').then(m => ({ default: m.Collection })))
 const B2B         = dynamic(() => import('@/components/B2B').then(m => ({ default: m.B2B })))
 const Rewards     = dynamic(() => import('@/components/Rewards').then(m => ({ default: m.Rewards })))
@@ -41,6 +42,7 @@ export default function Home() {
         <Hero />
         <StatsBanner />
         <Manifesto />
+        <Origen />
         <Collection />
         <B2B />
         <Rewards />

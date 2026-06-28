@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useCartStore } from '@/store/cart'
 
 const NAV_LINKS = [
-  { label: 'Herencia',  href: '/#herencia' },
-  { label: 'Destilados', href: '/#colección' },
+  { label: 'Origen',  href: '/#origen' },
+  { label: 'Productos', href: '/#colección' },
   { label: 'Contacto',  href: '/#contacto' },
 ]
 
