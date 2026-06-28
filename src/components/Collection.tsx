@@ -37,13 +37,41 @@ export function Collection() {
 
   return (
     <section id="colección" className="min-h-[calc(100vh-80px)] pt-16 md:pt-24 pb-12 px-4 md:px-16 lg:px-24">
-      <motion.h2
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground mb-6 tracking-widest uppercase"
-      >
-        Los destilados
-      </motion.h2>
+      <div className="mb-10 md:mb-16 text-center">
+        <motion.span
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="block text-[11px] md:text-[12px] tracking-[0.5em] text-primary font-condensed uppercase mb-3"
+        >
+          Destilería Artesanal · San Juan
+        </motion.span>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground tracking-[0.08em] uppercase leading-none"
+        >
+          Los destilados
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="flex items-center justify-center gap-4 mt-5"
+        >
+          <div className="w-8 h-[1.5px] bg-primary shrink-0" />
+          <p className="text-[11px] md:text-[12px] font-sans text-foreground/50 tracking-[0.22em] uppercase">
+            Cada expresión, destilada con obsesión
+          </p>
+          <div className="w-8 h-[1.5px] bg-primary shrink-0" />
+        </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {products.map((product, i) => (

@@ -20,7 +20,7 @@ export function Origen() {
         >
           <div className="relative h-[350px] sm:h-[450px] lg:h-[550px] w-full rounded-lg overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <Image
-              src="/images/hero-delirio.jpg"
+              src="/images/origen-1.jpg"
               alt="Paisaje de San Juan y procedencia de los botánicos de Delirio"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
