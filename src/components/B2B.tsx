@@ -7,7 +7,7 @@ export function B2B() {
   return (
     <section className="relative min-h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
       <Image
-        src="/images/generated-1778549080715.png"
+        src="/images/revendedor.webp"
         alt="Bar con botellas de Delirio Gin — oportunidad B2B para distribuidores y bares"
         fill
         className="object-cover"
